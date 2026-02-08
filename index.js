@@ -1,7 +1,5 @@
 import express from "express" 
 import axios from "axios" 
-import dirname from "dirname";
-import path from 'path'; 
 
 const app = express();
 const port = 3000; 
@@ -29,6 +27,7 @@ app.get("/", (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
-    
+
+    console.log(`Server is running on port ${port}`); 
+
 })
