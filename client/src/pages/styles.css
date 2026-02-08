@@ -1,0 +1,6 @@
+.container {
+    display:grid; 
+    justify-content: center;           /* Centers the columns horizontally */
+    align-content: center;             /* Centers the columns vertically */
+    height: 80vh; 
+}
