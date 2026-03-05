@@ -21,13 +21,17 @@ app.get("/", (req, res) => {
         } else {
             console.log("File sent successfully")
         }
-        console.log(err); 
-    }); 
+        console.log(err);  
+    });   
     
 });
+
+
 
 app.listen(port, () => {
 
     console.log(`Server is running on port ${port}`); 
 
-})
+});
+
+
