@@ -9,3 +9,14 @@
     min-width: 150px;
 
 }
+
+
+.comment-box {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 5px solid #2d4654ff;
+    border-radius: 15px;
+    padding: 7px;
+    margin: 10px;
+}

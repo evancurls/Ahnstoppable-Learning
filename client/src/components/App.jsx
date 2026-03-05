@@ -1,15 +1,15 @@
 import React from "react";
 //import RegistrationPage from '../pages/RegistrationPage';
 import PhotoHeader from './PhotoHeader';
+import Questions from "./Questions/Questions";
 
 function App() {
   return (
     <div className="demo-wrapper">
       <PhotoHeader />
-      <SignInPage />
       <Questions />
-      <Comments />
-      <TalentGraph />
+      {/* <Comments />
+      <TalentGraph /> */}
       <PhotoHeader />
     </div>
   );
