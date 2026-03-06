@@ -7,7 +7,7 @@ function Comment({
 }) {
   return (
     <div className="comment-box">
-      <div>{name}</div>
+      <div ><p>{name}</p></div>
       <div>{text}</div>
       <div>Item 3</div>
     </div>
