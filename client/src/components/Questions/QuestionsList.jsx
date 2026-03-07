@@ -1,21 +1,24 @@
 import React from "react";
-import Comment from "../ui/Comment";
+import Comment from "../ui/Comment/Comment";
 
 function QuestionsList({
     items=[]
 }){
     return (
         <div>
-          {items.map((todoItem, index) => (
+          {items.map((comment, index) => (
             <Comment
               key={index}
               id={index}
-              text={todoItem}
+              name={comment.name}
+              date={comment.date}
+              text={comment.text}
+              replies={comment.replies}
+              likes={comment.likes}
             />
           ))}
       </div>
     );
 }
-
 
 export default QuestionsList;

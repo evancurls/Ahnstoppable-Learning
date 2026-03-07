@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="demo-wrapper">
       <PhotoHeader />
-      <SignIn />
+      <div className="flex justify-center items-center"> <SignIn /> </div>
       <Questions />
       {/* <Comments />
       <TalentGraph /> */}

@@ -27,8 +27,12 @@ function SignIn(){
     }
 
     return (
-        <div>
-            <form className="flex flex-col items-center justify-center">  
+        <div className="rounded-lg shadow-md p-6 border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 w-1/2 text-md normal-case font-medium text-olive-100">
+            <form className="flex flex-col items-center justify-center gap-4">  
+                <h2> Sign in to your account </h2>
+                <p> Don't have an account? <a href="">Sign up</a></p>
+
+
                 {/* USERNAME INPUT FIELD */}
                 <Input 
                     label="Email"
