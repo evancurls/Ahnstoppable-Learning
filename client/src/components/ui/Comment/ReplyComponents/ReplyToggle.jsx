@@ -1,5 +1,5 @@
 import React from 'react';
-import RepliesList from '../RepliesList'; // Adjust path as needed
+import RepliesList from './RepliesList'; // Adjust path as needed
 
 function ReplyToggle({ replies = [], showReplies, onToggle }) {
   // IF NO REPLIES, DONT RENDER ANYTHING 

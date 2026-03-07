@@ -42,6 +42,7 @@ function SignIn(){
                     value={user.email}
                     // FUNCTION WHEN ANYTHING IS TYPED IN FIELD
                     onChange={handleChange}
+                    autocomplete={true}
                 />
 
                 {/* PASSWORD INPUT FIELD */}

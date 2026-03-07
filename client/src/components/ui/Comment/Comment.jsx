@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import CommentHeader from "./CommentHeader";
 import Reply from "./ReplyComponents/Reply";
-import RepliesList from "./RepliesList";
+import RepliesList from "./ReplyComponents/RepliesList";
 import MakeReply from "./ReplyComponents/MakeReply";
 import ReplyToggle from "./ReplyComponents/ReplyToggle";
 

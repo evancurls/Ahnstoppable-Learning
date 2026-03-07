@@ -3,20 +3,14 @@ import QuestionsInput from "./QuestionsInput";
 import QuestionsList from "./QuestionsList";
 
 function Questions() {
-  const [questions, setQuestions] = useState([{
-    id: 0,
-    name: "Anonymous",
-    date: findTime(),
-    replies: [],
-    likes: 0
-  }]);
+  const [questions, setQuestions] = useState([]);
 
   // ADDS COMMENT TO 
   function addItem(item) {
     const currTime = findTime();
     setQuestions(prevQuestions => {
       return [...prevQuestions, {
-        id: prevQuestions[prevQuestions.length - 1].id + 1,
+        id: (prevQuestions.length === 0) ? 0 : prevQuestions[prevQuestions.length - 1].id + 1,
         name:"Anonymous",
         date: currTime,
         text: item,

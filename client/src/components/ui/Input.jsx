@@ -6,6 +6,7 @@ function Input({
   type="text",
   value,
   onChange,
+  autocomplete=false
 }){
   return (
     <div className="input-box">
@@ -24,6 +25,7 @@ function Input({
         size="10"
         value={value} 
         onChange={onChange}
+        autocomplete={autocomplete}
       /> <br />
     </div>
   );
