@@ -2,7 +2,8 @@ import React from "react";
 import Comment from "../ui/Comment/Comment";
 
 function QuestionsList({
-    items=[]
+    items=[],
+    onAddReply
 }){
     return (
         <div>
@@ -13,8 +14,9 @@ function QuestionsList({
               name={comment.name}
               date={comment.date}
               text={comment.text}
-            //   replies={comment.replies}
+              replies={comment.replies}
               likes={comment.likes}
+              onAddReply={onAddReply}
             />
           ))}
       </div>

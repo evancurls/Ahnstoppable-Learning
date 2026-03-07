@@ -1,5 +1,5 @@
 import React from "react";
-import Reply from "./Reply";
+import Reply from "./ReplyComponents/Reply";
 
 function RepliesList({ replies = [] }) {
     console.log(replies);

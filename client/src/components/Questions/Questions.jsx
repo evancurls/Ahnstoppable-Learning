@@ -4,6 +4,7 @@ import QuestionsList from "./QuestionsList";
 
 function Questions() {
   const [questions, setQuestions] = useState([{
+    id: 0,
     name: "Anonymous",
     date: findTime(),
     replies: [],
@@ -15,6 +16,7 @@ function Questions() {
     const currTime = findTime();
     setQuestions(prevQuestions => {
       return [...prevQuestions, {
+        id: prevQuestions[prevQuestions.length - 1].id + 1,
         name:"Anonymous",
         date: currTime,
         text: item,
@@ -39,6 +41,24 @@ function Questions() {
     });
   }
 
+  function addReplyToQuestion(questionId, newReplyText) {
+    console.log(`Adding reply: ${newReplyText} to question ${questionId}`);
+    setQuestions(prevQuestions => {
+      return prevQuestions.map(question => {
+        // ONLY ADDS REPLY TO MATCHING QUESTION ID
+        console.log(question);
+        if (question.id === questionId) {
+          console.log("Adding reply");
+          return {
+            ...question,
+            replies: [...question.replies, { text: newReplyText, date: findTime(), name: "Anonymous" }]
+          };
+        }
+        return question; 
+      });
+    });
+  }
+
   return (
     <div className="rounded-lg shadow-md p-6 border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 w-1/2 text-md normal-case font-medium text-olive-100">
       <div className="heading">
@@ -47,7 +67,7 @@ function Questions() {
       <QuestionsInput 
         addItem={addItem}
       />
-      <QuestionsList items={questions}/>
+      <QuestionsList items={questions} onAddReply={addReplyToQuestion}/>
     </div>
   );
 }

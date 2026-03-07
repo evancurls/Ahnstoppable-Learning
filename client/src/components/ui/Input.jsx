@@ -2,7 +2,7 @@ import React from 'react';
 
 function Input({
   id="default",
-  label="default",
+  label,
   type="text",
   value,
   onChange,
