@@ -13,7 +13,7 @@ function QuestionsList({
               name={comment.name}
               date={comment.date}
               text={comment.text}
-              replies={comment.replies}
+            //   replies={comment.replies}
               likes={comment.likes}
             />
           ))}

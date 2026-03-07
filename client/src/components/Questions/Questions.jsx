@@ -3,19 +3,16 @@ import QuestionsInput from "./QuestionsInput";
 import QuestionsList from "./QuestionsList";
 
 function Questions() {
-  const [items, setItems] = useState([]);
   const [questions, setQuestions] = useState([{
     name: "Anonymous",
-    date: "",
+    date: findTime(),
     replies: [],
     likes: 0
   }]);
 
+  // ADDS COMMENT TO 
   function addItem(item) {
     const currTime = findTime();
-    setItems(prevItems => {
-      return [...prevItems, item];
-    });
     setQuestions(prevQuestions => {
       return [...prevQuestions, {
         name:"Anonymous",
@@ -33,6 +30,7 @@ function Questions() {
     return now;
   }
 
+  // CURRENTLY UNUSED
   function deleteItem(id) {
     setItems(prevItems => {
       return prevItems.filter((item, index) => {
