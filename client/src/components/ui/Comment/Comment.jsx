@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import CommentHeader from "./CommentHeader";
-import Reply from "./ReplyComponents/Reply";
+import Reply from "./Reply";
 import RepliesList from "./ReplyComponents/RepliesList";
 import MakeReply from "./ReplyComponents/MakeReply";
 import ReplyToggle from "./ReplyComponents/ReplyToggle";
@@ -10,15 +10,7 @@ function Comment({
     name="Anonymous",
     date="0:00 AM",
     text= "Sample Text",
-    replies=[{
-      name:"Anonymous",
-      date:"0:00 AM",
-      text: "Sample Text",
-    },{
-      name:"Anonymous",
-      date:"0:00 AM",
-      text: "Sample Text",
-    }],
+    replies=[{}],
     likes=0,
     onAddReply
 }) {
@@ -53,11 +45,4 @@ function Comment({
 
 export default Comment;
 
-// key={index}
-//               id={index}
-//               name={comment.name}
-//               date={comment.date}
-//               text={comment.item}
-//               replies={comment.replies}
-//               likes={comment.likes}
 

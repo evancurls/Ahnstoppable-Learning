@@ -8,7 +8,7 @@ function PhotoHeader(){
     return (
         <div className="flex flex-wrap gap-4 justify-center">
             {selectedPhotos.map((url, index) => (
-                <Photo className="w-[15%] aspect-[3/2] object-cover rounded-lg" key={index} src={url} alt={`Gallery ${index}`} />
+                <Photo className="w-[15%] aspect-3/2 object-cover rounded-lg" key={index} src={url} alt={`Gallery ${index}`} />
             ))}
         </div>
     );

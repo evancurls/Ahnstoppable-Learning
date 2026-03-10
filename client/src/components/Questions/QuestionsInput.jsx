@@ -22,7 +22,7 @@ function QuestionsInput({
             maxLength={125}
         />
     <button 
-        className="border border-slate-400 rounded-md px-4 py-2 opacity-100 transition-colors duration-150 shadow-none text-md normal-case font-normal text-olive-300 bg-transparent border-current hover:bg-slate-600"
+        className="border border-slate-400 rounded-md px-4 py-2 opacity-100 transition-colors duration-150 shadow-none text-md normal-case font-normal text-olive-300 bg-transparent hover:bg-slate-600"
         onClick={() => {
         changeText("");
         addItem(inputText);

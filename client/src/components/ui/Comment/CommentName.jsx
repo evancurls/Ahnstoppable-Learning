@@ -6,7 +6,7 @@ function CommentName({
 }){
     return(
         <div className="flex gap-2">
-            <h4 className="font-semibold text-gray-900 dark:text-white">{name}</h4>
+            <h4 className="text-base">{name}</h4>
             <p className="text-gray-500">{date}</p>
         </div>
     );

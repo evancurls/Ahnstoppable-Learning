@@ -6,9 +6,9 @@ import SignIn from "./SignIn/SignIn";
 
 function App() {
   return (
-    <div className="demo-wrapper">
+    <div className="demo-wrapper bg-gray-50">
       <PhotoHeader />
-      <div className="flex justify-center items-center"> <SignIn /> </div>
+      <SignIn />
       <Questions />
       {/* <Comments />
       <TalentGraph /> */}
