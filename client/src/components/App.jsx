@@ -4,6 +4,7 @@ import PhotoHeader from './PhotoHeader';
 import Questions from "./Questions/Questions";
 import SignIn from "./SignIn/SignIn";
 import UnderstandCheck from "./UnderstandCheck/UnderstandCheck";
+import TalentBoard from "./TalentBoard/TalentBoard";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <SignIn />
       <UnderstandCheck />
       <Questions />
+      <TalentBoard />
       {/* <Comments />
       <TalentGraph /> */}
       <PhotoHeader />
