@@ -23,24 +23,29 @@ function Comment({
   function postReply(text){
     
   }
-  // DECIDES TO DISPLAY SHOw/HIDE REPLIES
-  return (
-    <div className="bg-white dark:bg-gray-800">
+  // DECIDES TO SHOW/HIDE REPLIES
+return (
+  <div className="py-6 border-b pl-2 border-slate-200 dark:border-slate-800 last:border-0 bg-white dark:bg-slate-900 transition-colors">
+    <div className="flex flex-col gap-3">
+      {/* CONTENT */}
       <Reply name={name} date={date} text={text} />
-      <MakeReply 
-        postReply={postReply} 
-        onSubmit={(text) => {
-          onAddReply(id, text)
-        }}
-      />
-      {/* RENDERS IF ANY REPLIES ARE ABLE TO BE SHOWN */}
-      <ReplyToggle 
+      
+      {/* INTERACTION */}
+      <div className="pl-4 border-l-2 border-slate-100 dark:border-slate-800 ml-2 mt-2">
+        <MakeReply 
+          postReply={postReply} 
+          onSubmit={(text) => onAddReply(id, text)} 
+        />
+        
+        <ReplyToggle 
           replies={replies} 
           showReplies={showReplies} 
           onToggle={handleReplies} 
         />
+      </div>
     </div>
-  );
+  </div>
+);
 }
 
 export default Comment;

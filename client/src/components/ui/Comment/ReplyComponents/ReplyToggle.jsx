@@ -6,24 +6,23 @@ function ReplyToggle({ replies = [], showReplies, onToggle }) {
   if (replies.length === 0) return null;
 
   return (
-    <div className="mt-2">
-      {showReplies ? (
-        <>
-          <RepliesList replies={replies} />
-          <button 
-            onClick={onToggle} 
-            className="text-blue-300 italic mb-4 hover:underline cursor-pointer"
-          >
-            Hide replies
-          </button>
-        </>
-      ) : (
-        <button 
-          onClick={onToggle} 
-          className="text-blue-300 italic mb-4 hover:underline cursor-pointer"
-        >
-          Show {replies.length} {replies.length === 1 ? 'reply' : 'replies'}
-        </button>
+    <div className="mt-3 pl-11">
+      <button 
+        onClick={onToggle} 
+        className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 flex items-center gap-2 cursor-pointer transition-all"
+      >
+        <span className="h-px w-4 bg-blue-200 dark:bg-blue-800"></span>
+        {showReplies ? (
+          "Hide replies"
+        ) : (
+          `View ${replies.length} ${replies.length === 1 ? 'reply' : 'replies'}`
+        )}
+      </button>
+      
+      {showReplies && (
+        <div className="mt-4 space-y-4">
+           <RepliesList replies={replies} />
+        </div>
       )}
     </div>
   );

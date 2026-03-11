@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 function QuestionsInput({
   addItem=() => {}
@@ -9,29 +9,43 @@ function QuestionsInput({
     changeText(newText);
   }
 
-  return (
-    <div className="flex flex-col sm:flex-row gap-2 w-full max-w-xl">
-        <input 
-            name="questions-input"
-            className="flex-1 text-slate-800 border-2 border-slate-600 rounded-md 
-                px-3.5 pt-2 pb-4 bg-slate-50 outline-none transition-all duration-200 
-                hover:border-blue-400 focus:border-blue-400"
-            onChange={handleChange} 
-            type="text" 
-            value={inputText} 
-            maxLength={125}
-        />
-    <button 
-        className="border border-slate-400 rounded-md px-4 py-2 opacity-100 transition-colors duration-150 shadow-none text-md normal-case font-normal text-olive-300 bg-transparent hover:bg-slate-600"
-        onClick={() => {
-        changeText("");
-        addItem(inputText);
-        }}
-    >
-        <span>Post</span>
-    </button>
-</div>
-  );
+    return (
+        <div className="w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm overflow-hidden transition-all duration-300">
+        {/* Questions input section */}
+            <div className="p-1">
+            <textarea
+                name="questions-input"
+                rows="3"
+                className="w-full p-4 text-slate-900 dark:text-white bg-transparent outline-none resize-none placeholder-slate-400 dark:placeholder-slate-500 text-md font-medium"
+                onChange={handleChange}
+                placeholder="Post any questions here:"
+                value={inputText}
+                maxLength={125}
+            />
+            </div>
+
+            {/* Footer */}
+            <div className="flex items-center justify-between px-4 py-2 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800">
+                {/* Char Count */}
+                <span className={`text-xs font-medium ${inputText.length >= 110 ? 'text-orange-500' : 'text-slate-500 dark:text-slate-400'}`}>
+                    {inputText.length} / 125
+                </span>
+
+
+                <button
+                    className="px-5 py-2 rounded-md font-semibold text-sm tracking-wide transition-all duration-200 
+                        text-white bg-blue-600 hover:bg-blue-700 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
+                    onClick={() => {
+                        changeText("");
+                        addItem(inputText);
+                    }}
+                    disabled={!inputText.trim()}
+                >
+                    Post Question
+                </button>
+            </div>
+        </div>
+    );
 }
 
 export default QuestionsInput;
