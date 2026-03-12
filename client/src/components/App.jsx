@@ -1,4 +1,6 @@
-import React from "react";
+import {useEffect, useState} from "react";
+import axios from "axios"; 
+import cors from "cors"; 
 //import RegistrationPage from '../pages/RegistrationPage';
 import PhotoHeader from './PhotoHeader';
 import Questions from "./Questions/Questions";
@@ -8,6 +10,17 @@ import TalentBoard from "./TalentBoard/TalentBoard";
 import StudentDashboard from "./StudentDashboard/StudentDashboard";
 
 function App() {
+  const {array, setArray} = useState([]); 
+
+  const fetchData = async () => {
+    const response = await axios.get("http://localhost:3000");
+    setArray(response.data.msg); 
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [])
+
   return (
     <div className="demo-wrapper bg-gray-50">
       <PhotoHeader />

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Discussion Board App for Class",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -24,6 +25,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.2.1",
     "axios": "^1.13.4",
+    "cors": "^2.8.6",
     "express": "^5.2.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
