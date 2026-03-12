@@ -17,7 +17,7 @@ app.use(cors(corsOptions));
 
 // gets the homepage 
 // loads up 
-app.get("/", (res, req) => {
+app.get("/", (req, res) => {
     res.json({
         msg: "Hello"
     }) 

@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import axios from "axios"; 
-import cors from "cors"; 
 //import RegistrationPage from '../pages/RegistrationPage';
 import PhotoHeader from './PhotoHeader';
 import Questions from "./Questions/Questions";
