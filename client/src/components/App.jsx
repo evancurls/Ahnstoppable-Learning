@@ -5,12 +5,14 @@ import Questions from "./Questions/Questions";
 import SignIn from "./SignIn/SignIn";
 import UnderstandCheck from "./UnderstandCheck/UnderstandCheck";
 import TalentBoard from "./TalentBoard/TalentBoard";
+import StudentDashboard from "./StudentDashboard/StudentDashboard";
 
 function App() {
   return (
     <div className="demo-wrapper bg-gray-50">
       <PhotoHeader />
       <SignIn />
+      <StudentDashboard />
       <UnderstandCheck />
       <Questions />
       <TalentBoard />
