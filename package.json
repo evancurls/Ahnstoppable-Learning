@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Discussion Board App for Class",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
