@@ -143,7 +143,7 @@ function SignIn(){
                 </div>
             </div>
         </div>
-        // <div className="rounded-lg shadow-md p-6 border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 w-1/2 text-md normal-case font-medium text-olive-100">
+        // <div className="rounded-lg shadow-md p-6 border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 w-1/2 normal-case font-medium text-olive-100">
             
         // </div>
     );
@@ -177,7 +177,7 @@ export default SignIn;
 
 //                 {/* SUBMIT BUTTON */}
 //                 <input 
-//                     className="border rounded-md px-3.5 py-2 opacity-100 text-md normal-case font-medium text-slate-600 shadow-zinc-500/50 bg-transparent border-current"
+//                     className="border rounded-md px-3.5 py-2 opacity-100 normal-case font-medium text-slate-600 shadow-zinc-500/50 bg-transparent border-current"
 //                     type="submit" 
 //                     // THIS FUNCTION IS CALLED WHEN I CLICK THE BUTTON:
 //                     onClick={handleClick}

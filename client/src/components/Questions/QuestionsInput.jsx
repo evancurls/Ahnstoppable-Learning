@@ -16,7 +16,7 @@ function QuestionsInput({
             <textarea
                 name="questions-input"
                 rows="3"
-                className="w-full p-4 text-slate-900 dark:text-white bg-transparent outline-none resize-none placeholder-slate-400 dark:placeholder-slate-500 text-md font-medium"
+                className="w-full p-4 text-slate-900 dark:text-white bg-transparent outline-none resize-none placeholder-slate-400 dark:placeholder-slate-500 font-medium"
                 onChange={handleChange}
                 placeholder="Post any questions here:"
                 value={inputText}
