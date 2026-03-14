@@ -33,4 +33,21 @@
   .component-border {
     @apply rounded-lg shadow-md p-6 border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 w-1/2 normal-case font-medium text-olive-100;
   }
+
+  .xyz-text {
+    @apply font-bold  text-slate-400;
+  }
+  .std-text {
+    @apply text-slate-900 dark:text-white font-semibold;
+  }
+
+  .xyz-background {
+    @apply px-2 py-1 rounded bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600;
+  }
+}
+
+@theme {
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+    --font-brand: "Outfit", sans-serif;
 }

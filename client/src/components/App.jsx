@@ -2,11 +2,9 @@ import React, {useEffect, useState} from "react";
 import axios from "axios"; 
 //import RegistrationPage from '../pages/RegistrationPage';
 import PhotoHeader from './PhotoHeader';
-import Questions from "./Questions/Questions";
 import SignIn from "./SignIn/SignIn";
-import UnderstandCheck from "./UnderstandCheck/UnderstandCheck";
-import TalentBoard from "./TalentBoard/TalentBoard";
-import StudentDashboard from "./StudentDashboard/StudentDashboard";
+import StudentDashboard from "./Dashboards/StudentDashboard/StudentDashboard";
+import ClassDashboard from "./Dashboards/ClassDashboard/ClassDashboard";
 
 function App() {
   const {array, setArray} = useState([]); 
@@ -25,9 +23,7 @@ function App() {
       <PhotoHeader />
       <SignIn />
       <StudentDashboard />
-      <UnderstandCheck />
-      <Questions />
-      <TalentBoard />
+      <ClassDashboard />
       {/* <Comments />
       <TalentGraph /> */}
       <PhotoHeader />
