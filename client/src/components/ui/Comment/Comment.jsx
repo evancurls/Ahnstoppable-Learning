@@ -26,12 +26,12 @@ function Comment({
   // DECIDES TO SHOW/HIDE REPLIES
 return (
   <div className="py-6 border-b pl-2 border-slate-200 dark:border-slate-800 last:border-0 bg-white dark:bg-slate-900 transition-colors">
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-1">
       {/* CONTENT */}
       <Reply name={name} date={date} text={text} />
       
       {/* INTERACTION */}
-      <div className="pl-4 border-l-2 border-slate-100 dark:border-slate-800 ml-2 mt-2">
+      <div className=" border-slate-100 dark:border-slate-800 ml-2 mt-2">
         <MakeReply 
           postReply={postReply} 
           onSubmit={(text) => onAddReply(id, text)} 

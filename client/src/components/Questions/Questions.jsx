@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import QuestionsInput from "./QuestionsInput";
 import QuestionsList from "./QuestionsList";
 
-function Questions() {
+function Questions({
+  discussionList = {}
+}) {
   const [questions, setQuestions] = useState([]);
 
   // ADDS COMMENT TO 
@@ -56,7 +58,7 @@ function Questions() {
   return (
     <div className="gap-4 rounded-lg shadow-md p-6 border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 w-1/2 normal-case font-medium text-olive-100">
       <div className="heading">
-         <h1>Questions</h1>
+         <h1 className="std-text">Questions</h1>
       </div>
       <QuestionsInput 
         addItem={addItem}
@@ -68,3 +70,10 @@ function Questions() {
 }
 
 export default Questions;
+
+
+// {isPending 
+//       ? (<span>Loading...</span>) 
+//       : error 
+//       ? (<span> Oops!</span>) 
+//       : <QuestionsList items={questions} onAddReply={addReplyToQuestion}/>}

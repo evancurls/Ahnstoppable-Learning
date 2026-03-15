@@ -20,7 +20,7 @@ function TalentBoard(){
     <div className="w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm overflow-hidden transition-all duration-300">
       {/* Header */}
       <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/50">
-        <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+        <h2 className="text-lg font-bold std-text  flex items-center gap-2">
           <span>Top Contributors</span>
           <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300">
             {students.length} Students
@@ -47,7 +47,7 @@ function TalentBoard(){
                 {/* Name & Points */}
                 <div className="flex-1">
                   <div className="flex justify-between items-end mb-1">
-                    <span className="text-sm font-bold text-slate-900 dark:text-slate-100">
+                    <span className="text-sm font-bold std-text dark:text-slate-100">
                       {student.name}
                     </span>
                     <span className="text-sm font-mono font-semibold text-blue-600 dark:text-blue-400">

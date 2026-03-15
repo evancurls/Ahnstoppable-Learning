@@ -10,13 +10,13 @@ function QuestionsInput({
   }
 
     return (
-        <div className="w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm overflow-hidden transition-all duration-300">
+        <div className="w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden transition-all duration-300">
         {/* Questions input section */}
             <div className="p-1">
             <textarea
                 name="questions-input"
                 rows="3"
-                className="w-full p-4 text-slate-900 dark:text-white bg-transparent outline-none resize-none placeholder-slate-400 dark:placeholder-slate-500 font-medium"
+                className="w-full p-4 std-text  bg-transparent outline-none resize-none placeholder-slate-400 dark:placeholder-slate-500 font-medium"
                 onChange={handleChange}
                 placeholder="Post any questions here:"
                 value={inputText}

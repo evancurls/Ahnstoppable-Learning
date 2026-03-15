@@ -4,10 +4,10 @@ function CourseList({ courses }){
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {courses.map((course, index) => (
-              <div key={index} className="group shadow-lg p-5 bg-slate-50/50 dark:bg-slate-800/40 hover:border-blue-300 dark:hover:border-blue-500/50 transition-all cursor-pointer">
+              <div key={index} className="group p-5 bg-olive-400/20 dark:bg-slate-800/40 hover:bg-olive-300/20 dark:hover:bg-slate-800/60 transition-all cursor-pointer">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    <h3 className="text-lg font-bold std-text  group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                       {course.title}
                     </h3>
                     <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">

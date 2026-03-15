@@ -20,26 +20,28 @@ function ClassDashboard({}){
         setDate(newDate);
     }
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex transition-colors duration-300">
+        <div className="min-h-screen background flex transition-colors duration-300">
             <main className="flex-1 pb-2">
                 <Header />
                 <div className="justify-center">
-                    <label 
-                        for="viewing-date"
+                    <div>
+                        <label 
+                        htmlFor="viewing-date"
                         className="std-text"
-                    >
-                        Now Viewing Logs for:
-                    </label>
-                    <input
-                        onChange={handleDate}
-                        className="bg-slate-50"
-                        type="date"
-                        id="viewing-date"
-                        name="trip-start"
-                        value={viewDate}
-                        min="2026-01-01"
-                        max={today} 
-                    />
+                        >
+                            Now Viewing Logs for:
+                        </label>
+                        <input
+                            onChange={handleDate}
+                            className="background"
+                            type="date"
+                            id="viewing-date"
+                            name="trip-start"
+                            value={viewDate}
+                            min="2026-01-01"
+                            max={today} 
+                        />
+                    </div>
                     <UnderstandCheck />
                     <Questions />
                     <TalentBoard />

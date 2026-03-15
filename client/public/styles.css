@@ -44,6 +44,18 @@
   .xyz-background {
     @apply px-2 py-1 rounded bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600;
   }
+
+  .blue-btn {
+    @apply px-5 py-2.5 rounded-md font-semibold text-sm tracking-wide transition-all duration-200 
+            text-white bg-blue-600 hover:bg-blue-700 active:scale-95 shadow-md flex items-center gap-2;
+  }
+  .emoji-btn {
+    @apply w-15 h-15 rounded-4xl std-text  text-center text-4xl font-semibold duration-300 transition-colors;
+  }
+  .background {
+    @apply bg-slate-50 dark:bg-slate-950;
+  }
+
 }
 
 @theme {

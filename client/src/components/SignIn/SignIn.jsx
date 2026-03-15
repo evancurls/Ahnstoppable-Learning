@@ -35,19 +35,19 @@ function SignIn(){
     return (
         // background for screen
         <div className="bg-gray-50">
-            <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+            <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4 background transition-colors duration-300">
                 <div className="max-w-120 w-full">
 
                     {/* sign in box */}
                     <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 shadow-sm">
-                        <h1 className="text-slate-900 dark:text-white text-center text-3xl font-semibold">
+                        <h1 className="std-text  text-center text-3xl font-semibold">
                             Sign in
                         </h1>
                     
                     {/* <form className="flex flex-col items-center justify-center gap-4">   */}
                         <form className="mt-12 space-y-6">
                             <div>
-                                <label className="text-slate-900 dark:text-slate-200 text-sm font-medium mb-2 block">
+                                <label className="std-text text-sm mb-2 block">
                                     User name
                                 </label>
                                 <div className="relative flex items-center">
@@ -58,7 +58,7 @@ function SignIn(){
                                         required
                                         value={user.email}
                                         onChange={handleChange} 
-                                        className="w-full text-slate-900 dark:text-white bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-4 py-3 pr-10 rounded-md outline-blue-600 focus:ring-2 focus:ring-blue-500/20" 
+                                        className="w-full std-text  bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-4 py-3 pr-10 rounded-md outline-blue-600 focus:ring-2 focus:ring-blue-500/20" 
                                         placeholder="Enter user name" 
                                     />
 
@@ -69,7 +69,7 @@ function SignIn(){
                                 </div>
                             </div>
                             <div>
-                                <label className="text-slate-900 dark:text-slate-200 text-sm font-medium mb-2 block">
+                                <label className="std-text text-sm mb-2 block">
                                     Password
                                 </label>
                                 <div className="relative flex items-center">
@@ -80,7 +80,7 @@ function SignIn(){
                                         required
                                         value={user.password}
                                         onChange={handleChange} 
-                                        className="w-full text-slate-900 dark:text-white bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-4 py-3 pr-10 rounded-md outline-blue-600 focus:ring-2 focus:ring-blue-500/20" 
+                                        className="w-full std-text  bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-4 py-3 pr-10 rounded-md outline-blue-600 focus:ring-2 focus:ring-blue-500/20" 
                                         placeholder="Enter password" 
                                     />
                                     
@@ -92,7 +92,7 @@ function SignIn(){
                             <div className="flex flex-wrap items-center justify-between gap-4">
                                 <div className="flex items-center">
                                     <input id="remember-me" type="checkbox" className="h-4 w-4 text-blue-600 dark:bg-slate-800 border-slate-300 dark:border-slate-700 rounded" />
-                                        <label htmlFor="remember-me" className="ml-3 block text-sm text-slate-900 dark:text-slate-300">
+                                        <label htmlFor="remember-me" className="ml-3 block text-sm std-text dark:text-slate-300">
                                             Remember me
                                         </label>
                                     </div>
@@ -107,7 +107,7 @@ function SignIn(){
                                     Sign in
                                 </button>
                             </div>
-                            <p className="text-slate-900 dark:text-slate-400 text-sm text-center">
+                            <p className="std-text dark:text-slate-400 text-sm text-center">
                                 Don't have an account? 
                                 <a href="#" className="text-blue-600 dark:text-blue-400 hover:underline ml-1 font-semibold">
                                     Register here
@@ -115,16 +115,16 @@ function SignIn(){
                             </p>
                             <div className="my-4 flex items-center gap-4">
                                 <hr className="w-full border-slate-300 dark:border-slate-700" />
-                                <p className="text-sm text-slate-900 dark:text-slate-400 text-center">or</p>
+                                <p className="text-sm std-text dark:text-slate-400 text-center">or</p>
                                 <hr className="w-full border-slate-300 dark:border-slate-700" />
                             </div>
                             <button 
                                 type="button" 
                                 className="w-full flex items-center justify-center gap-4 py-2.5 px-6 text-[15px] font-medium tracking-wide rounded-md transition-all duration-200 cursor-pointer
                                         /* Light Mode Styles */
-                                        text-slate-900 border border-slate-300 bg-slate-50 hover:bg-slate-100 
+                                        std-text border border-slate-300 bg-slate-50 hover:bg-slate-100 
                                         /* Dark Mode Styles */
-                                        dark:text-white dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700
+                                         dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700
                                         focus:outline-none"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20px" className="inline" viewBox="0 0 512 512">

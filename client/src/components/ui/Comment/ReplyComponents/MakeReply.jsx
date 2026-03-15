@@ -27,9 +27,9 @@ function MakeReply({
         }
     }
     return (
-    <div className="mt-2 pl-11">
+    <div className="mt-2 pl-5">
       {showReplyBox ? (
-        <div className="bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700 p-3">
+        <div className="p-1">
           <ReplyHeader replyText={reply} handleReply={handleReply} />
           <div className="flex justify-end gap-2 mt-2">
             <ReplyFooter 

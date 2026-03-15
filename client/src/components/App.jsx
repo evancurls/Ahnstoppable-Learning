@@ -3,7 +3,7 @@ import axios from "axios";
 //import RegistrationPage from '../pages/RegistrationPage';
 import PhotoHeader from './PhotoHeader';
 import SignIn from "./SignIn/SignIn";
-import StudentDashboard from "./Dashboards/StudentDashboard/StudentDashboard";
+import HomeDashboard from "./Dashboards/HomeDashboard/HomeDashboard";
 import ClassDashboard from "./Dashboards/ClassDashboard/ClassDashboard";
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
     <div className="demo-wrapper bg-gray-50">
       <PhotoHeader />
       <SignIn />
-      <StudentDashboard />
+      <HomeDashboard />
       <ClassDashboard />
       {/* <Comments />
       <TalentGraph /> */}

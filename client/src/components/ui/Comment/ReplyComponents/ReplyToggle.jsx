@@ -6,7 +6,7 @@ function ReplyToggle({ replies = [], showReplies, onToggle }) {
   if (replies.length === 0) return null;
 
   return (
-    <div className="mt-3 pl-11">
+    <div className="mt-3 pl-5">
       <button 
         onClick={onToggle} 
         className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 flex items-center gap-2 cursor-pointer transition-all"
