@@ -14,6 +14,14 @@ app.get("/", (res, req) => {
     })
 });
 
+app.post("/post", (res, req) => {
+
+}); 
+
+app.post("/post", (res, req) => {
+
+}); 
+
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`)
 });
