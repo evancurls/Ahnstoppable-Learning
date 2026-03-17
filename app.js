@@ -1,6 +1,6 @@
 import express from "express"; 
 import cors from "cors"; 
-import pg from "pg"; 
+import { Pool } from "pg"; 
 
 // initilize express 
 const app = express(); 
@@ -10,11 +10,11 @@ const corsOptions = {
     origin: ["http://localhost:5173"]
 };
 
-const client = new pg.Client({
+const pool = new Pool({
   user: "postgres", 
-  password: "oscarpostgres", 
+  password: process.env.DB_PASSWORD, 
   host: "localhost", 
-  database: "world", 
+  database: "AhnstoppableLearning", 
   port: 5432
 });
 
@@ -25,21 +25,35 @@ app.use(express.json()); // For parsing JSON data (used for API requests)
 app.use(express.urlencoded({ extended: true })); // For parsing form data (used for standard html)
 app.use(cors(corsOptions)); 
 
-app.get("/", (res, req) => {
-    res.json({
-        msg: "Hello"
-    })
+app.get("/api/questions", async (req, res) => {
+
+    try {
+        // gets questions in chronological order
+        const allQuestions = await pool.query("SELECT * FROM questions WHERE condition ORDER BY created_at DESC"); 
+        res.json(allQuestions.rows); 
+    } catch (err) {
+        res.status(500).json({error: err.message})
+    }
+
 });
 
-async function findIndex(index) {
-    
-};
+app.get("/api/comments", async (req, res) => {
 
-app.post("/api/questions", async (res, req) => {
+    try {
+        // gets questions in chronological order
+        const allComments = await pool.query("SELECT * FROM comments WHERE condition ORDER BY created_at DESC"); 
+        res.json(allComments.rows); 
+    } catch (err) {
+        res.status(500).json({error: err.message})
+    }
+    
+});
+
+app.post("/api/questions", async (req, res) => {
     const { student_id, class_id, content } = req.body;
 
     try {
-        const newQuestion = await client.query(
+        const newQuestion = await pool.query(
         "INSERT INTO questions (student_id, class_id, content) VALUES ($1, $2, $3) RETURNING *",
         [student_id, class_id, content]
         );
@@ -51,11 +65,11 @@ app.post("/api/questions", async (res, req) => {
     }
 }); 
 
-app.post("/api/comments", async (res, req) => {
+app.post("/api/comments", async (req, res) => {
     const { student_id, class_id, content } = req.body;
 
     try {
-        const newQuestion = await client.query(
+        const newQuestion = await pool.query(
         "INSERT INTO comments (student_id, class_id, content) VALUES ($1, $2, $3) RETURNING *",
         [student_id, class_id, content]
         );
@@ -67,12 +81,26 @@ app.post("/api/comments", async (res, req) => {
     }
 });
 
-app.delete("/api/questions", (res, req) => {
-    
+app.delete("/api/questions:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+        await pool.query("DELETE FROM questions WHERE id = $1", [id]);
+        res.json({ message: "Question deleted successfully" });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    }
 }); 
 
-app.delete("/api/comments", (res, req) => {
-    
+app.delete("/api/comments:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+        await pool.query("DELETE FROM comments WHERE id = $1", [id]);
+        res.json({ message: "Question deleted successfully" });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    }
 }); 
 
 app.listen(port, () => {
