@@ -1,6 +1,7 @@
 import express from "express"; 
 import cors from "cors"; 
 import { Pool } from "pg"; 
+import "dotenv/config";
 
 // initilize express 
 const app = express(); 
@@ -81,10 +82,15 @@ app.post("/api/comments", async (req, res) => {
     }
 });
 
-app.delete("/api/questions:id", async (req, res) => {
+app.delete("/api/questions/:id", async (req, res) => {
     const { id } = req.params;
     try {
-        await pool.query("DELETE FROM questions WHERE id = $1", [id]);
+        const result = await pool.query("DELETE FROM questions WHERE id = $1", [id]);
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ message: "Question not found" });
+        }
+
         res.json({ message: "Question deleted successfully" });
     } catch (err) {
         console.error(err.message);
@@ -92,10 +98,15 @@ app.delete("/api/questions:id", async (req, res) => {
     }
 }); 
 
-app.delete("/api/comments:id", async (req, res) => {
+app.delete("/api/comments/:id", async (req, res) => {
     const { id } = req.params;
     try {
-        await pool.query("DELETE FROM comments WHERE id = $1", [id]);
+        const result = await pool.query("DELETE FROM comments WHERE id = $1", [id]);
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ message: "Comment not found" });
+        }
+        
         res.json({ message: "Question deleted successfully" });
     } catch (err) {
         console.error(err.message);
