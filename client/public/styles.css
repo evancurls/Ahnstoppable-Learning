@@ -50,7 +50,7 @@
             text-white bg-blue-600 hover:bg-blue-700 active:scale-95 shadow-md flex items-center gap-2;
   }
   .emoji-btn {
-    @apply w-15 h-15 rounded-4xl std-text  text-center text-4xl font-semibold duration-300 transition-colors;
+    @apply w-15 h-15 rounded-4xl text-slate-900 dark:text-white font-semibold text-center text-4xl duration-300 transition-colors;
   }
   .background {
     @apply bg-slate-50 dark:bg-slate-950;

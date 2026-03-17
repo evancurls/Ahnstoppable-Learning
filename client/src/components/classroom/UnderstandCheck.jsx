@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import SectionHeading from "../SectionHeading";
+import SectionHeading from "../ui/SectionHeading";
 
 function UnderstandCheck(){
     function handleClick(){

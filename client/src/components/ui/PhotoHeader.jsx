@@ -1,5 +1,5 @@
 import React from "react";
-import studentPhotos from "../assets/studentPhotos/studentPhotos";
+import studentPhotos from "../../assets/studentPhotos/studentPhotos";
 import Photo from "./Photo";
 
 function PhotoHeader(){

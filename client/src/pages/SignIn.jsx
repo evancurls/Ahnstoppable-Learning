@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import Input from "../ui/Input";
+import Input from "../components/ui/Input";
 
 
 function SignIn(){

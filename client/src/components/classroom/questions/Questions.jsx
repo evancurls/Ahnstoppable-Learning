@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import api from "../../../api";
+
 import QuestionsInput from "./QuestionsInput";
 import QuestionsList from "./QuestionsList";
 
@@ -26,15 +28,6 @@ function Questions({
     const now = new Date().toLocaleTimeString([], {hour: 'numeric', minute: '2-digit', hour12: true });
     console.log(now);
     return now;
-  }
-
-  // CURRENTLY UNUSED
-  function deleteItem(id) {
-    setItems(prevItems => {
-      return prevItems.filter((item, index) => {
-        return index !== id;
-      });
-    });
   }
 
   function addReplyToQuestion(questionId, newReplyText) {

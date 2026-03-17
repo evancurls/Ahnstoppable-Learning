@@ -1,5 +1,5 @@
 import React from "react";
-import Comment from "../ui/Comment/Comment";
+import Comment from "./Comment/Comment";
 
 function QuestionsList({
     items=[],

@@ -1,6 +1,6 @@
 import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./components/App";
+import App from "./App";
 
 //connects to the index.html file
 const root = createRoot(document.getElementById('root'));

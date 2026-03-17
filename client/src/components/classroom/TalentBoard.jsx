@@ -1,5 +1,5 @@
 import React, {useMemo} from "react";
-import SectionHeading from "../SectionHeading";
+import SectionHeading from "../ui/SectionHeading";
 
 function TalentBoard(){
     const students = [

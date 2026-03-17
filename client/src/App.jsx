@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios"; 
 //import RegistrationPage from '../pages/RegistrationPage';
-import PhotoHeader from './PhotoHeader';
-import SignIn from "./SignIn/SignIn";
-import HomeDashboard from "./Dashboards/HomeDashboard/HomeDashboard";
-import ClassDashboard from "./Dashboards/ClassDashboard/ClassDashboard";
+import PhotoHeader from './components/ui/PhotoHeader';
+import SignIn from "./pages/SignIn";
+import HomeDashboard from "./pages/HomeDashboard";
+import ClassDashboard from "./pages/ClassDashboard";
 
 function App() {
   const {array, setArray} = useState([]); 
