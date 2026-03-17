@@ -4,9 +4,7 @@ import api from "../../../api";
 import QuestionsInput from "./QuestionsInput";
 import QuestionsList from "./QuestionsList";
 
-function Questions({
-  discussionList = {}
-}) {
+function DiscussionPost({ post }) {
   const [questions, setQuestions] = useState([]);
 
   // ADDS COMMENT TO 
@@ -49,9 +47,9 @@ function Questions({
   }
 
   return (
-    <div className="gap-4 rounded-lg shadow-md p-6 border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 w-1/2 normal-case font-medium text-olive-100">
+    <div className="w-full max-w-2xl gap-4 rounded-lg shadow-md p-6 border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 normal-case font-medium text-olive-100">
       <div className="heading">
-         <h1 className="std-text">Questions</h1>
+         <h1 className="std-text">Subject: What do you want to do LOL</h1>
       </div>
       <QuestionsInput 
         addItem={addItem}
@@ -62,7 +60,7 @@ function Questions({
   );
 }
 
-export default Questions;
+export default DiscussionPost;
 
 
 // {isPending 

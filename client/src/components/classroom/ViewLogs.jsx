@@ -1,6 +1,21 @@
-import React from "react"
+import React, { useState } from "react"
 
 function ViewLogs(){
+
+    const today = new Date().toLocaleDateString('en-CA', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
+    
+    const [viewDate, setDate] = useState(today);
+
+    function handleDate(event){
+        const newDate = event.target.value;
+        console.log(event.target.value);
+        setDate(newDate);
+    }
+
     return (
         <div>
             <label 
