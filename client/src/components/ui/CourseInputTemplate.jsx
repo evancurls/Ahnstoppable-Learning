@@ -11,7 +11,7 @@ function CourseInputTemplate({
 }){
     return (
         <div>
-                <label className="std-text text-sm mb-2 block">
+                <label className="std-text text-sm mb-2 block" htmlFor={id}>
                     {label}
                 </label>
                 <div className="relative flex items-center">
