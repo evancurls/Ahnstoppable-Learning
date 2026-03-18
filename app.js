@@ -1,7 +1,9 @@
 import express from "express"; 
 import cors from "cors"; 
 import { Pool } from "pg"; 
-import "dotenv/config";
+import dotenv from "dotenv";
+
+dotenv.config({ path: "hidden.env" });
 
 // initilize express 
 const app = express(); 
@@ -45,10 +47,10 @@ app.get("/api/comments", asyncHandler(async (req, res) => {
 
 app.get("/api/questions/:classID/:date", asyncHandler(async (req, res) => {
 
-    const {classId, date} = req.params; 
+    const {classID, date} = req.params; 
     const result = await pool.query(
         "SELECT * FROM questions WHERE class_id = $1 AND DATE(created_at) = $2 ORDER BY created_at DESC",
-        [classId, date]
+        [classID, date]
     );
 
     res.json(result.rows);
@@ -57,16 +59,15 @@ app.get("/api/questions/:classID/:date", asyncHandler(async (req, res) => {
 
 app.get("/api/comments/:classID/:date", asyncHandler(async (req, res) => {
 
-    const {classId, date} = req.params; 
+    const {classID, date} = req.params; 
     const result = await pool.query(
         "SELECT * FROM comments WHERE class_id = $1 AND DATE(created_at) = $2 ORDER BY created_at DESC",
-        [classId, date]
+        [classID, date]
     );
 
     res.json(result.rows);
 
 }));
-
 
 app.post("/api/questions", asyncHandler(async (req, res) => {
     const { student_id, class_id, content } = req.body;
@@ -83,12 +84,12 @@ app.post("/api/questions", asyncHandler(async (req, res) => {
 app.post("/api/comments", asyncHandler(async (req, res) => {
     const { student_id, class_id, content } = req.body;
 
-    const newQuestion = await pool.query(
+    const newComment = await pool.query(
     "INSERT INTO comments (student_id, class_id, content) VALUES ($1, $2, $3) RETURNING *",
     [student_id, class_id, content]
     );
 
-    res.status(201).json(newQuestion.rows[0]);
+    res.status(201).json(newComment.rows[0]);
 }));
 
 app.delete("/api/questions/:id", asyncHandler(async (req, res) => {
