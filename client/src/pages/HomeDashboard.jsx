@@ -9,6 +9,7 @@ import SectionHeading from "../components/ui/SectionHeading";
 import Header from "../components/homepage/Header";
 import CourseList from "../components/homepage/CourseList";
 import CreateCourse from "../components/homepage/CreateCourse";
+import CourseAddPopup from "../components/homepage/CourseAddPopup";
 
 function HomeDashboard() {
   const myCourses = [{
@@ -41,19 +42,19 @@ function HomeDashboard() {
 }
 
   const [isAdmin, setAdmin] = useState(true);
-
+  const [showPopup, setPopup] = useState(false);
   return (
     <div className="min-h-screen background flex transition-colors duration-300">
       {/* MAIN CONTENT */}
-      <main className="flex-1 pb-2">
+      <main className="relative flex-1 pb-2">
         <Header />
-
+        {showPopup && (<CourseAddPopup removePopUp={() => {setPopup(!showPopup)}} handleSubmit={() => {}}/>)}
         {isAdmin && <CreateCourse />}
         {/* ENROLLED COURSES*/}
         <div className="p-6 sm:p-8">
           <div className="flex justify-between mb-6">
              <SectionHeading text="Enrolled Courses" />
-             <button className="blue-btn">
+             <button className="blue-btn" onClick={() => {setPopup(!showPopup)}}>
                 <span className="text-lg">+</span> Add a Course
               </button>
           </div>
