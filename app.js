@@ -38,7 +38,7 @@ app.get("/api/questions", asyncHandler(async (req, res) => {
 
 app.get("/api/comments", asyncHandler(async (req, res) => {
     // gets questions in chronological order
-    const allComments = await pool.query("SELECT * FROM comments WHERE condition ORDER BY created_at DESC"); 
+    const allComments = await pool.query("SELECT * FROM comments ORDER BY created_at DESC"); 
     res.json(allComments.rows); 
     
 }));
@@ -66,7 +66,7 @@ app.post("/api/comments", asyncHandler(async (req, res) => {
     res.status(201).json(newQuestion.rows[0]);
 }));
 
-app.delete("/api/questions/:id", asyncHanlder(async (req, res) => {
+app.delete("/api/questions/:id", asyncHandler(async (req, res) => {
     const { id } = req.params;
     const result = await pool.query("DELETE FROM questions WHERE id = $1", [id]);
 
@@ -77,7 +77,7 @@ app.delete("/api/questions/:id", asyncHanlder(async (req, res) => {
     res.json({ message: "Question deleted successfully" });
 })); 
 
-app.delete("/api/comments/:id", async (req, res) => {
+app.delete("/api/comments/:id", asyncHandler(async (req, res) => {
     const { id } = req.params;
 
     const result = await pool.query("DELETE FROM comments WHERE id = $1", [id]);
@@ -87,7 +87,11 @@ app.delete("/api/comments/:id", async (req, res) => {
     }
     
     res.json({ message: "Question deleted successfully" });
-}); 
+})); 
+
+app.use((req, res) => {
+    res.status(404).json({ error: "Route not found" });
+});
 
 // global error handler 
 app.use((err, req, res, next) => {
