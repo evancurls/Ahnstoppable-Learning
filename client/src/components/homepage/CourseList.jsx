@@ -1,10 +1,20 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 
 function CourseList({ courses }){
+  const navigate = useNavigate();
+
+  function handleClick(){
+    navigate('/class');
+  }
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {courses.map((course, index) => (
-              <div key={index} className="group p-5 bg-olive-400/20 dark:bg-slate-800/40 hover:bg-olive-300/20 dark:hover:bg-slate-800/60 transition-all cursor-pointer">
+              <div 
+                key={index} 
+                className="group p-5 bg-olive-400/20 dark:bg-slate-800/40 hover:bg-olive-300/20 dark:hover:bg-slate-800/60 transition-all cursor-pointer"
+                onClick={handleClick}  
+              >
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <h3 className="text-lg font-bold std-text  group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">

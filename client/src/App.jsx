@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios"; 
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 //import RegistrationPage from '../pages/RegistrationPage';
 import PhotoHeader from './components/ui/PhotoHeader';
 import SignIn from "./pages/SignIn";
@@ -20,13 +21,15 @@ function App() {
 
   return (
     <div className="demo-wrapper bg-gray-50">
-      <PhotoHeader />
-      <SignIn />
-      <HomeDashboard />
-      <ClassDashboard />
-      {/* <Comments />
-      <TalentGraph /> */}
-      <PhotoHeader />
+      <BrowserRouter>
+        {/* <PhotoHeader /> */}
+        <Routes>
+          <Route path="/" element={<SignIn />} />
+          <Route path="/home" element={<HomeDashboard />} />
+          <Route path="/class" element={<ClassDashboard />} />
+        </Routes>
+        {/* <PhotoHeader /> */}
+      </BrowserRouter>
     </div>
   );
 }

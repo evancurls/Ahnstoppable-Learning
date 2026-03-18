@@ -1,8 +1,9 @@
 import React, {useState} from "react";
-import Input from "../components/ui/Input";
-
+import { useNavigate } from 'react-router-dom';
 
 function SignIn(){
+
+    const navigate = useNavigate();
     // HOLDS USERNAME AND PASSWORD
     const [user, setUser] = useState({
         email: "",
@@ -27,9 +28,8 @@ function SignIn(){
     }
 
     // FUNCTION WHEN SUBMIT BUTTON IS CLICKED
-    function handleClick(event){
-        console.log(user);
-        event.preventDefault();
+    function handleSignIn(){
+        navigate('/home');
     }
 
     return (
@@ -103,7 +103,11 @@ function SignIn(){
                                 </div>
                             </div>
                             <div className="mt-12!">
-                                <button type="button" className="w-full py-3 px-4 text-sm font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700 active:scale-[0.98] transition-all">
+                                <button    
+                                    type="button" 
+                                    className="w-full py-3 px-4 text-sm font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700 active:scale-[0.98] transition-all"
+                                    onClick={handleSignIn}
+                                >
                                     Sign in
                                 </button>
                             </div>

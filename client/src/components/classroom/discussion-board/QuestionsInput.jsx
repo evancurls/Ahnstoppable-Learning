@@ -33,7 +33,7 @@ function QuestionsInput({
 
 
                 <button
-                    className="px-5 py-2 rounded-md font-semibold text-sm tracking-wide transition-all duration-200 
+                    className="px-5 py-2 rounded-md font-semibold text-sm tracking-wide transition-all duration-200 cursor-pointer
                         text-white bg-blue-600 hover:bg-blue-700 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
                     onClick={() => {
                         changeText("");
@@ -41,7 +41,7 @@ function QuestionsInput({
                     }}
                     disabled={!inputText.trim()}
                 >
-                    Post Question
+                    Post
                 </button>
             </div>
         </div>

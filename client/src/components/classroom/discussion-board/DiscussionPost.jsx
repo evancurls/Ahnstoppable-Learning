@@ -47,9 +47,9 @@ function DiscussionPost({ post }) {
   }
 
   return (
-    <div className="w-full max-w-2xl gap-4 rounded-lg shadow-md p-6 border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 normal-case font-medium text-olive-100">
-      <div className="heading">
-         <h1 className="std-text">Subject: What do you want to do LOL</h1>
+    <div className="w-full max-w-2xl rounded-lg shadow-md p-6 border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 normal-case font-medium text-olive-100">
+      <div className="heading pb-4">
+         <h1 className="std-text">Post any comments here!</h1>
       </div>
       <QuestionsInput 
         addItem={addItem}

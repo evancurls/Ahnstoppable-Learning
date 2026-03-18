@@ -28,7 +28,7 @@ function CourseAddPopup({ removePopUp }){
                     placeholder="Enter Course Link"
                 />
                 <div className="flex flex-row items-end justify-end gap-2 pt-2">
-                    <button className="white-btn">
+                    <button className="white-btn" onClick={removePopUp}>
                         Cancel
                     </button>
                     <button className="blue-btn">

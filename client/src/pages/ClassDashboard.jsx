@@ -10,7 +10,9 @@ function ClassDashboard({}){
     return (
         <div className="min-h-screen background flex transition-colors duration-300">
             <main className="w-screen"> 
-                <Header />
+                <Header rightContent={() => {
+                    
+                }}/>
                 <div className="mx-auto flex flex-col justify-center items-center gap-4 w-10/12 bg-white dark:bg-slate-800">
                     <ViewLogs />
                     <UnderstandCheck />

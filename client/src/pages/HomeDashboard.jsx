@@ -29,25 +29,15 @@ function HomeDashboard() {
     ref: "Section 01"
   }];
 
-  async function getClasses() {
-    try{
-      const responses = axios({
-        method: 'get',
-        url: '',
-        params: {},
-      });
-    } catch (error) {
-
-    }
-}
-
   const [isAdmin, setAdmin] = useState(true);
   const [showPopup, setPopup] = useState(false);
   return (
     <div className="min-h-screen background flex transition-colors duration-300">
       {/* MAIN CONTENT */}
       <main className="relative flex-1 pb-2">
-        <Header />
+        <Header rightContent={() => {
+          
+        }} />
         {showPopup && (<CourseAddPopup removePopUp={() => {setPopup(!showPopup)}} handleSubmit={() => {}}/>)}
         {isAdmin && <CreateCourse />}
         {/* ENROLLED COURSES*/}
