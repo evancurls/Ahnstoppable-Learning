@@ -37,11 +37,36 @@ app.get("/api/questions", asyncHandler(async (req, res) => {
 }));
 
 app.get("/api/comments", asyncHandler(async (req, res) => {
-    // gets questions in chronological order
+    // gets comments in chronological order
     const allComments = await pool.query("SELECT * FROM comments ORDER BY created_at DESC"); 
     res.json(allComments.rows); 
     
 }));
+
+app.get("/api/questions/:classID/:date", asyncHandler(async (req, res) => {
+
+    const {classId, date} = req.params; 
+    const result = await pool.query(
+        "SELECT * FROM questions WHERE class_id = $1 AND DATE(created_at) = $2 ORDER BY created_at DESC",
+        [classId, date]
+    );
+
+    res.json(result.rows);
+
+}));
+
+app.get("/api/comments/:classID/:date", asyncHandler(async (req, res) => {
+
+    const {classId, date} = req.params; 
+    const result = await pool.query(
+        "SELECT * FROM comments WHERE class_id = $1 AND DATE(created_at) = $2 ORDER BY created_at DESC",
+        [classId, date]
+    );
+
+    res.json(result.rows);
+
+}));
+
 
 app.post("/api/questions", asyncHandler(async (req, res) => {
     const { student_id, class_id, content } = req.body;
@@ -86,7 +111,7 @@ app.delete("/api/comments/:id", asyncHandler(async (req, res) => {
         return res.status(404).json({ message: "Comment not found" });
     }
     
-    res.json({ message: "Question deleted successfully" });
+    res.json({ message: "Comment deleted successfully" });
 })); 
 
 app.use((req, res) => {
