@@ -1,9 +1,6 @@
 import express from "express"; 
 import cors from "cors"; 
-import { Pool } from "pg"; 
-import dotenv from "dotenv";
-
-dotenv.config({ path: "hidden.env" });
+import {pool} from "./db.js"
 
 // initilize express 
 const app = express(); 
@@ -12,14 +9,6 @@ const port = 3000;
 const corsOptions = {
     origin: ["http://localhost:5173"]
 };
-
-const pool = new Pool({
-  user: "postgres", 
-  password: hidden.env.DB_PASSWORD, 
-  host: "localhost", 
-  database: "AhnstoppableLearning", 
-  port: 5432
-});
 
 // asyncHandler
 const asyncHandler = (fn) => (req, res, next) => {

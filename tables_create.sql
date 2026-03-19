@@ -3,6 +3,9 @@ CREATE TABLE students (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
+    google_id INT NOT NULL, 
+    username TEXT NOT NULL, 
+    password_hash TEXT NOT NULL, 
     email TEXT UNIQUE NOT NULL 
 );
 
