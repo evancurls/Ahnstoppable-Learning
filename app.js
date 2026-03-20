@@ -20,6 +20,10 @@ app.use(express.json()); // For parsing JSON data (used for API requests)
 app.use(express.urlencoded({ extended: true })); // For parsing form data (used for standard html)
 app.use(cors(corsOptions)); 
 
+app.get("/", (req, res) => {
+   res.json({msg: ["Hello from the backend"]}); 
+})
+
 app.get("/api/questions", asyncHandler(async (req, res) => {
     // gets questions in chronological order
     const allQuestions = await pool.query("SELECT * FROM questions ORDER BY created_at DESC"); 

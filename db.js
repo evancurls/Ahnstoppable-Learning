@@ -5,7 +5,7 @@ dotenv.config({ path: "hidden.env" });
 
 export const pool = new Pool({
   user: "postgres", 
-  password: hidden.env.DB_PASSWORD, 
+  password: process.env.DB_PASSWORD, 
   host: "localhost", 
   database: "AhnstoppableLearning", 
   port: 5432

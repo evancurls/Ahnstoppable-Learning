@@ -8,7 +8,7 @@ import HomeDashboard from "./pages/HomeDashboard";
 import ClassDashboard from "./pages/ClassDashboard";
 
 function App() {
-  const {array, setArray} = useState([]); 
+  const [array, setArray] = useState([]); 
 
   const fetchData = async () => {
     const response = await axios.get("http://localhost:3000");
