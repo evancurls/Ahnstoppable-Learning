@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import DiscussionPost from "./DiscussionPost";
 import api from "../../../api";
 
+//CURRENTLY UNUSED
 function DiscussionFeed({ classRoomId }){
     const [posts, setPosts] = useState([]);
 

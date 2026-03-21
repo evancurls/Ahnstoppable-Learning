@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { useNavigate } from 'react-router-dom';
+import PhotoHeader from "../components/ui/PhotoHeader";
 
 function SignIn(){
 
@@ -35,7 +36,7 @@ function SignIn(){
     return (
         // background for screen
         <div className="bg-gray-50">
-            <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4 background transition-colors duration-300">
+            <div className="min-h-screen flex flex-row gap-2 items-center justify-center py-6 px-4 background transition-colors duration-300">
                 <div className="max-w-120 w-full">
 
                     {/* sign in box */}
@@ -145,6 +146,9 @@ function SignIn(){
                         </form>
                     </div>
                 </div>
+                <div>
+                    <PhotoHeader />
+                </div>
             </div>
         </div>
         // <div className="rounded-lg shadow-md p-6 border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 w-1/2 normal-case font-medium text-olive-100">
@@ -154,36 +158,3 @@ function SignIn(){
 }
 
 export default SignIn;
-
-
-
-// {/* USERNAME INPUT FIELD */}
-//                 <Input 
-//                     label="Email"
-//                     key={0}
-//                     id="email"
-//                     type="email"
-//                     value={user.email}
-//                     // FUNCTION WHEN ANYTHING IS TYPED IN FIELD
-//                     onChange={handleChange}
-//                 />
-
-//                 {/* PASSWORD INPUT FIELD */}
-//                 <Input 
-//                     label="Password"
-//                     key={1}
-//                     id="password"
-//                     type="password"
-//                     value={user.password}
-//                     // FUNCTION WHEN ANYTHING IS TYPED IN FIELD
-//                     onChange={handleChange}
-//                 />
-
-//                 {/* SUBMIT BUTTON */}
-//                 <input 
-//                     className="border rounded-md px-3.5 py-2 opacity-100 normal-case font-medium text-slate-600 shadow-zinc-500/50 bg-transparent border-current"
-//                     type="submit" 
-//                     // THIS FUNCTION IS CALLED WHEN I CLICK THE BUTTON:
-//                     onClick={handleClick}
-//                 >
-//                 </input>

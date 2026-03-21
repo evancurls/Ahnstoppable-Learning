@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CourseInputTemplate from "../ui/CourseInputTemplate";
 
-function CreateCourse(){
+function CreateCourse({ submitCourse }){
 
     const [isMakingCourse, setCourse] = useState(false);
 
@@ -9,16 +9,17 @@ function CreateCourse(){
     const [courseName, setCourseName] = useState("");
     const [courseSTime, setCourseSTime] = useState("");
     const [courseETime, setCourseETime] = useState("");
-
-    function submitCourse(){
-        console.log(courseName);
-        console.log(courseSTime);
-        console.log(courseETime);
+    function clearForm(){
+        setCourse(!isMakingCourse);
+        setCourseName("");
+        setCourseSTime("");
+        setCourseETime("");
     }
+
     return (
         <div>
             { isMakingCourse ? (
-                <form className="p-6 max-w-half w-full">
+                <form className="p-6 max-w-half w-full" action={submitCourse}>
                     <div className=" grid grid-cols-2 gap-4">
                         <div className="col-span-2">
                             <CourseInputTemplate 
@@ -31,15 +32,23 @@ function CreateCourse(){
                                 placeholder="" 
                             />
                         </div>
-                        <CourseInputTemplate
-                            label="Course Start Time"
-                            name="coursestime"
-                            type="time"
-                            id={1}
-                            value={courseSTime}
-                            onChange={(event) => setCourseSTime(event.target.value)}
-                            placeholder="" 
-                        />
+                        <div>
+                            <label className="std-text text-sm mb-2 block" htmlFor="coursestime">
+                                Course Start Time
+                            </label>
+                            <div className="relative flex items-center">
+                                <input 
+                                    name="coursestime"
+                                    type="time"
+                                    id="coursestime"
+                                    required
+                                    value={courseSTime}
+                                    onChange={(event) => setCourseSTime(event.target.value)}
+                                    className="w-full std-text  bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-4 py-3 pr-10 rounded-md outline-blue-600 focus:ring-2 focus:ring-blue-500/20" 
+                                    placeholder=""
+                                />
+                            </div>
+                        </div>
                         <div>
                             <label className="std-text text-sm mb-2 block" htmlFor="courseetime">
                                 Course End Time
@@ -61,16 +70,13 @@ function CreateCourse(){
                         <div className="col-span-2 gap-2 flex flex-row items-end justify-end">
                             <button
                                 className="blue-btn"
-                                onClick={() => {setCourse(!isMakingCourse)}}
+                                onClick={() => {clearForm}}
                             >
                                 Cancel
                             </button>
                             <button
                                 className="blue-btn"
-                                onClick={() => {
-                                    submitCourse()
-                                    setCourse(!isMakingCourse)
-                                }}
+                                type="submit"
                             >
                                 Create Course
                             </button>
