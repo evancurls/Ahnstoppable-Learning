@@ -1,5 +1,5 @@
 import express from "express";
-import passport from "passport";
+import passport from "../config/passport.js";
 import jwt from "jsonwebtoken";
 import { authenticateToken } from "../middleware/auth.js";
 
@@ -15,11 +15,12 @@ router.get("/google/callback",
     (req, res) => {
         const token = jwt.sign(
             {id: req.user.id, email: req.user.email}, 
-            hidden.env.JWT_SECRET, 
+            process.env.JWT_SECRET, 
             {expiresIn: "7d"}
         ); 
-    
-        res.redirect(`${process.env.CLIENT_URL}/auth/callback?token=${token}`);
+        
+        const clientUrl = process.env.CLIENT_URL || "http://localhost:5173"
+        res.redirect(`${clientUrl}/auth/callback?token=${token}`);
     } 
 );
 
