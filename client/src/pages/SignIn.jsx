@@ -146,7 +146,7 @@ function SignIn(){
                         </form>
                     </div>
                 </div>
-                <div>
+                <div className="hidden md:block">
                     <PhotoHeader />
                 </div>
             </div>

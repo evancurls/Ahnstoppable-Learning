@@ -28,7 +28,6 @@ function HomeDashboard() {
     hours: "11:00 - 11:50 AM",
     ref: "Section 01"
   }];
-
   const [courseList, setCourseList] = useState(myCourses);
   const [isAdmin, setAdmin] = useState(true);
   const [showPopup, setPopup] = useState(false);
@@ -37,7 +36,7 @@ function HomeDashboard() {
     const courseName = courseData.get("coursename");
     const courseSTime = courseData.get("coursestime");
     const courseETime = courseData.get("courseetime"); 
-    setCourseList(prevCourses => [
+    setCourseList((prevCourses) => [
       {
         title: courseName,
         prof: "Professor Ahn",

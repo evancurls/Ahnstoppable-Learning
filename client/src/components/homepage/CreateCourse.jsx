@@ -70,7 +70,7 @@ function CreateCourse({ submitCourse }){
                         <div className="col-span-2 gap-2 flex flex-row items-end justify-end">
                             <button
                                 className="blue-btn"
-                                onClick={() => {clearForm}}
+                                onClick={clearForm}
                             >
                                 Cancel
                             </button>
