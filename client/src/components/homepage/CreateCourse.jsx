@@ -16,10 +16,15 @@ function CreateCourse({ submitCourse }){
         setCourseETime("");
     }
 
+    async function formSubmit( body ){
+        await submitCourse(body);
+        clearForm();
+    }
+
     return (
         <div>
             { isMakingCourse ? (
-                <form className="p-6 max-w-half w-full" action={submitCourse}>
+                <form className="p-6 max-w-half w-full" action={formSubmit}>
                     <div className=" grid grid-cols-2 gap-4">
                         <div className="col-span-2">
                             <CourseInputTemplate 
@@ -85,12 +90,15 @@ function CreateCourse({ submitCourse }){
                 </form>
             ) :
             (
+                <div className="flex items-center justify-center">
                 <button 
-                    className="blue-btn w-1/2 max-w-2xl flex items-center justify-center"
+                    type="submit"
+                    className="blue-btn w-1/2 max-w-2xl"
                     onClick={() => {setCourse(!isMakingCourse)
                 }}>
                     Create A Course
                 </button>
+                </div>
             )}
         </div>
     );
