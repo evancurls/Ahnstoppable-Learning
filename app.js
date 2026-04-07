@@ -1,24 +1,26 @@
+import "dotenv/config"; 
 import express from "express";
 import cors from "cors";
 import {pool} from "./db.js";
+import router from "./routes/auth.js"; 
+import passport from "./config/passport.js"; 
+
 
 // initilize express 
 const app = express(); 
-const port = 3000; 
 
 const corsOptions = {
     origin: ["http://localhost:5173"]
 };
 
-// asyncHandler (express 5.0 has it built in )
-// const asyncHandler = (fn) => (req, res, next) => {
-//   Promise.resolve(fn(req, res, next)).catch(next);
-// };
-
 //middleware 
 app.use(express.json()); // For parsing JSON data (used for API requests)
 app.use(express.urlencoded({ extended: true })); // For parsing form data (used for standard html)
 app.use(cors(corsOptions)); 
+if (process.env.NODE_ENV !== "test") {
+    app.use(passport.authenticate()); 
+}
+app.use("/auth", router); 
 
 app.get("/", (req, res) => {
    res.json({msg: ["Hello from the backend"]}); 
@@ -112,15 +114,5 @@ app.use((req, res) => {
     res.status(404).json({ error: "Route not found" });
 });
 
-// global error handler 
-// app.use((err, req, res, next) => {
-//   console.error(err.stack);
-//   res.status(err.status || 500).json({
-//     error: err.message || "Internal Server Error"
-//   });
-// });
-
-app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`)
-});
+export default app 
 

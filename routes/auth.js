@@ -33,5 +33,7 @@ router.post("/logout", (req, res) => {
     res.json({message: "Logged out"}); 
 })
 
+export default router 
+
 
 

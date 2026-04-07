@@ -1,7 +1,4 @@
-import dotenv from "dotenv";
 import {Pool} from "pg";
-
-dotenv.config({ path: "hidden.env" });
 
 export const pool = new Pool({
   user: "postgres", 
