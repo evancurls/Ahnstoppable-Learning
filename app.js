@@ -72,28 +72,38 @@ app.post("/api/questions", async (req, res) => {
     [student_id, class_id, content]
     );
 
+    const questionData = newQuestion.rows[0]; 
+    req.app.get("io").emit("receive_new_question", questionData);
+
     res.status(201).json(newQuestion.rows[0]);
     
 }); 
 
 app.post("/api/comments", async (req, res) => {
-    const { student_id, class_id, content } = req.body;
+    const { student_id, class_id, question_id, content } = req.body;
 
     const newComment = await pool.query(
-    "INSERT INTO comments (student_id, class_id, content) VALUES ($1, $2, $3) RETURNING *",
-    [student_id, class_id, content]
+    "INSERT INTO comments (student_id, class_id, question_id, content) VALUES ($1, $2, $3, $4) RETURNING *",
+    [student_id, class_id, question_id, content]
     );
 
-    res.status(201).json(newComment.rows[0]);
+    const commentData = newComment.rows[0]; 
+    req.app.get("io").to(`class_${class_id}`).emit("receive_new_comment", commentData);
+
+    res.status(201).json(commentData);
 });
 
 app.delete("/api/questions/:id", async (req, res) => {
     const { id } = req.params;
-    const result = await pool.query("DELETE FROM questions WHERE id = $1", [id]);
+    const result = await pool.query("DELETE FROM questions WHERE id = $1 RETURNING class_id", 
+        [id]);
 
     if (result.rowCount === 0) {
         return res.status(404).json({ message: "Question not found" });
     }
+
+    const classID = result.rows[0].class_id; 
+    req.app.get("io").to(`class_${classID}`).emit("question_deleted", id);
 
     res.json({ message: "Question deleted successfully" });
 }); 
@@ -101,17 +111,28 @@ app.delete("/api/questions/:id", async (req, res) => {
 app.delete("/api/comments/:id", async (req, res) => {
     const { id } = req.params;
 
-    const result = await pool.query("DELETE FROM comments WHERE id = $1", [id]);
+    const result = await pool.query("DELETE FROM comments WHERE id = $1 RETURNING class_id", 
+        [id]);
 
     if (result.rowCount === 0) {
         return res.status(404).json({ message: "Comment not found" });
     }
+
+    const classID = result.rows[0].class_id; 
+    req.app.get("io").to(`class_${classID}`).emit("comment_deleted", id);
     
     res.json({ message: "Comment deleted successfully" });
 }); 
 
 app.use((req, res) => {
     res.status(404).json({ error: "Route not found" });
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.status || 500).json({
+    error: err.message || "Internal Server Error"
+  });
 });
 
 export default app 
