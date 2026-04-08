@@ -3,15 +3,7 @@ import DiscussionPost from "./DiscussionPost";
 import api from "../../../api";
 
 //CURRENTLY UNUSED
-function DiscussionFeed({ classRoomId=null }){
-    const [posts, setPosts] = useState(["Add a Comment Here!", "check", "check1"]);
-
-    function addPost( post ){
-        setPosts(prevPosts => {
-            return [...prevPosts, post]
-        });
-    }
-
+function DiscussionFeed({ posts, setPosts, classRoomId=null }){
     //gets the list of posts from ClassRoomID, then maps those to individual discussion posts
     // useEffect(() => {
     //     api.get(`/classrooms/${classroomId}/posts`).then(res => setPosts(res.data));
