@@ -1,53 +1,39 @@
-import React, {useState} from "react";
-import CommentHeader from "./CommentHeader";
+// src/components/classroom/discussion-board/Comment/Comment.jsx
+import React, { useState } from "react";
 import Reply from "./Reply";
 import RepliesList from "./ReplyComponents/RepliesList";
 import MakeReply from "./ReplyComponents/MakeReply";
 import ReplyToggle from "./ReplyComponents/ReplyToggle";
 
 function Comment({
-    id= 0,
-    name="Anonymous",
-    date="0:00 AM",
-    text= "Sample Text",
-    replies=[{}],
-    likes=0,
-    onAddReply
+  id,
+  name = "Anonymous",
+  date = "0:00 AM",
+  text = "Sample Text",
+  replies = [],
+  onAddReply,
 }) {
-  const [showReplies, setReplies] = useState(false);
+  const [showReplies, setShowReplies] = useState(false);
 
-  function handleReplies(){
-    setReplies(!showReplies);
-  }
-  //console.log(replies);
-  function postReply(text){
-    
-  }
-  // DECIDES TO SHOW/HIDE REPLIES
-return (
-  <div className="py-6 border-b pl-2 border-slate-200 dark:border-slate-800 last:border-0 bg-white dark:bg-slate-900 transition-colors">
-    <div className="flex flex-col gap-1">
-      {/* CONTENT */}
-      <Reply name={name} date={date} text={text} />
-      
-      {/* INTERACTION */}
-      <div className=" border-slate-100 dark:border-slate-800 ml-2 mt-2">
-        <MakeReply 
-          postReply={postReply} 
-          onSubmit={(text) => onAddReply(id, text)} 
-        />
-        
-        <ReplyToggle 
-          replies={replies} 
-          showReplies={showReplies} 
-          onToggle={handleReplies} 
-        />
+  return (
+    <div className="py-6 border-b pl-2 border-slate-200 dark:border-slate-800 last:border-0 bg-white dark:bg-slate-900 transition-colors">
+      <div className="flex flex-col gap-1">
+        {/* Comment body */}
+        <Reply name={name} date={date} text={text} />
+
+        {/* Reply input + toggle */}
+        <div className="border-slate-100 dark:border-slate-800 ml-2 mt-2">
+          <MakeReply onSubmit={(replyText) => onAddReply(id, replyText)} />
+
+          <ReplyToggle
+            replies={replies}
+            showReplies={showReplies}
+            onToggle={() => setShowReplies((v) => !v)}
+          />
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 }
 
 export default Comment;
-
-

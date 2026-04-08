@@ -3,8 +3,10 @@
 // Evan Inrig
 
 import React, { useEffect, useState } from "react";
-import api from "../api";
-
+import { useNavigate } from "react-router-dom";
+import api from "../api/axios";
+import { useAuth } from "../context/AuthContext";
+ 
 import SectionHeading from "../components/ui/SectionHeading";
 import Header from "../components/ui/Header";
 import CourseList from "../components/homepage/CourseList";
@@ -12,73 +14,131 @@ import CreateCourse from "../components/homepage/CreateCourse";
 import CourseAddPopup from "../components/homepage/CourseAddPopup";
 
 function HomeDashboard() {
-  const myCourses = [{
-    title: "ADV 375",
-    prof: "Professor Ahn",
-    hours: "11:00 - 11:50 AM",
-    ref: "Section 01"
-  }, {
-    title: "ADV 375",
-    prof: "Professor Ahn",
-    hours: "11:00 - 11:50 AM",
-    ref: "Section 01"
-  }, {
-    title: "ADV 375",
-    prof: "Professor Ahn",
-    hours: "11:00 - 11:50 AM",
-    ref: "Section 01"
-  }];
-  const [courseList, setCourseList] = useState(myCourses);
-  const [isAdmin, setAdmin] = useState(true);
-  const [showPopup, setPopup] = useState(false);
-
-  function createCourse(courseData){
-    const courseName = courseData.get("coursename");
-    const courseSTime = courseData.get("coursestime");
-    const courseETime = courseData.get("courseetime"); 
-    setCourseList((prevCourses) => [
-      {
-        title: courseName,
-        prof: "Professor Ahn",
-        hours: `${courseSTime} - ${courseETime}`,
-        ref: "Section 02"
-      }, ...prevCourses]
-    );
-  }
-
+  const { user }                      = useAuth();
+  const navigate                      = useNavigate();
+  const [courseList, setCourseList]   = useState([]);
+  const [showPopup, setPopup]         = useState(false);
+  const [loadError, setLoadError]     = useState(null);
+ 
+  // Load enrolled courses on mount
   useEffect(() => {
-    console.log(courseList);
-  }, [courseList]);
-
-  function addCourse(courseCode){
-    const code = courseCode.get("courseid");
-    console.log(code);
-    setPopup(!showPopup);
+    api
+      .get("/api/classes")
+      .then((res) =>
+        setCourseList(
+          res.data.map((c) => ({
+            id:    c.id,
+            title: c.title,
+            prof:  c.professor_name,
+            hours: c.start_time && c.end_time
+              ? `${c.start_time} – ${c.end_time}`
+              : "Time TBD",
+            ref:       c.section ?? "Active",
+            join_code: c.join_code,
+          }))
+        )
+      )
+      .catch((err) => setLoadError(err.message));
+  }, []);
+ 
+  async function createCourse(formData) {
+    const title      = formData.get("coursename");
+    const start_time = formData.get("coursestime") || null;
+    const end_time   = formData.get("courseetime") || null;
+    const section    = formData.get("section") || null;
+ 
+    try {
+      const { data } = await api.post("/api/classes", {
+        title, section, start_time, end_time,
+      });
+      setCourseList((prev) => [
+        {
+          id:        data.id,
+          title:     data.title,
+          prof:      user?.name ?? "You",
+          hours:     data.start_time && data.end_time
+            ? `${data.start_time} – ${data.end_time}`
+            : "Time TBD",
+          ref:       data.section ?? "Active",
+          join_code: data.join_code,
+        },
+        ...prev,
+      ]);
+    } catch (err) {
+      console.error("Failed to create course:", err.response?.data?.error);
+    }
   }
+ 
+  async function addCourse(formData) {
+    const join_code = formData.get("courseid");
+    if (!join_code) return;
+ 
+    try {
+      const { data } = await api.post("/api/classes/join", { join_code });
+      setCourseList((prev) => [
+        {
+          id:    data.id,
+          title: data.title,
+          prof:  "Professor",
+          hours: data.start_time && data.end_time
+            ? `${data.start_time} – ${data.end_time}`
+            : "Time TBD",
+          ref:   data.section ?? "Active",
+        },
+        ...prev,
+      ]);
+      setPopup(false);
+    } catch (err) {
+      console.error(
+        "Failed to join course:",
+        err.response?.data?.error ?? err.message
+      );
+    }
+  }
+ 
+  // Navigate to the class page using the real class id
+  function handleCourseClick(courseId) {
+    navigate(`/class/${courseId}`);
+  }
+ 
   return (
     <div className="min-h-screen background flex transition-colors duration-300">
-      {/* MAIN CONTENT */}
       <main className="relative flex-1 pb-2">
-        <Header rightContent={() => {
-          
-        }} />
-        {showPopup && (<CourseAddPopup removePopUp={() => {setPopup(!showPopup)}} addCourse={addCourse}/>)}
-        
-        {isAdmin && <CreateCourse submitCourse={createCourse}/>}
-
-        {/* ENROLLED COURSES*/}
+        <Header rightContent={() => null} />
+ 
+        {showPopup && (
+          <CourseAddPopup
+            removePopUp={() => setPopup(false)}
+            addCourse={addCourse}
+          />
+        )}
+ 
+        {user?.role === "professor" && (
+          <CreateCourse submitCourse={createCourse} />
+        )}
+ 
         <div className="p-6 sm:p-8">
           <div className="flex justify-between mb-6">
-             <SectionHeading text="Enrolled Courses" />
-             <button className="blue-btn" onClick={() => {setPopup(!showPopup)}}>
-                <span className="text-lg">+</span> Add a Course
-              </button>
+            <SectionHeading text="Enrolled Courses" />
+            <button
+              className="blue-btn"
+              onClick={() => setPopup(true)}
+            >
+              <span className="text-lg">+</span> Add a Course
+            </button>
           </div>
-          <CourseList courses={courseList}/>
+ 
+          {loadError && (
+            <p className="text-sm text-red-400 mb-4">
+              Could not load courses: {loadError}
+            </p>
+          )}
+ 
+          <CourseList courses={courseList} onCourseClick={handleCourseClick} />
         </div>
       </main>
     </div>
   );
 }
-
+ 
 export default HomeDashboard;
