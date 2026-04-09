@@ -8,7 +8,7 @@ const http       = require('http');
 const { Server } = require('socket.io');
 const cors       = require('cors');
  
-const authRoutes      = require('../../routes/auth');
+const authRoutes      = require('./routes/auth');
 const classRoutes     = require('./routes/classes');
 const postRoutes      = require('./routes/posts');
 const commentRoutes   = require('./routes/comments');
