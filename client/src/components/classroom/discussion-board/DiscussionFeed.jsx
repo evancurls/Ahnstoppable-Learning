@@ -4,7 +4,7 @@ import DiscussionPost from "./DiscussionPost";
 import api from "../../../api/axios";
 import { useClassSocket } from "../../../hooks/useClassSocket";
 
-function DiscussionFeed({ date, classRoomId = null }) {
+function DiscussionFeed({ date, classRoomId, showNames }) {
   const [posts, setPosts]     = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError]     = useState(null);
@@ -57,7 +57,7 @@ function DiscussionFeed({ date, classRoomId = null }) {
   return (
     <div className="w-full flex flex-col gap-2 justify-center items-center">
       {posts.map((post) => (
-        <DiscussionPost key={post.id} post={post} setPosts={setPosts} />
+        <DiscussionPost key={post.id} post={post} setPosts={setPosts} showNames={showNames} />
       ))}
     </div>
   );

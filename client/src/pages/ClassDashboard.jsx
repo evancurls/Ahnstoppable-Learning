@@ -8,12 +8,15 @@ import Header from "../components/ui/Header";
 import ViewLogs from "../components/classroom/ViewLogs";
 import CreateDiscussion from "../components/classroom/CreateDiscussion";
 import DiscussionFeed from "../components/classroom/discussion-board/DiscussionFeed";
+import AnonymousToggle from "../components/classroom/AnonymousToggle";
 import { useAuth } from "../context/AuthContext";
 
 function ClassDashboard() {
   // classId comes from the route: <Route path="/class/:classId" element={<ClassDashboard />} />
   const { classId } = useParams();
   const { user }    = useAuth();
+  const [showNames, setShowNames] = useState(user?.role === 'professor');
+
 
   const today = new Date().toLocaleDateString("en-CA");
   const [viewDate, setViewDate] = useState(today);
@@ -27,18 +30,25 @@ function ClassDashboard() {
       <main className="w-screen">
         <Header rightContent={() => null} />
         <div className="mx-auto flex flex-col justify-center items-center gap-4 w-10/12 bg-white dark:bg-slate-800">
-          <ViewLogs date={viewDate} today={today} handleDate={handleDate} />
-          <UnderstandCheck classId={classId} />
+            <ViewLogs date={viewDate} today={today} handleDate={handleDate} />
+            <UnderstandCheck classId={classId} />
 
-          {/* Only professors see the "Create Discussion" button */}
-          {user?.role === "professor" && (
-            <CreateDiscussion classRoomId={classId} />
-          )}
+            {/* Only professors see the "Create Discussion" button */}
+            {user?.role === "professor" && (
+            <div>
+                <CreateDiscussion classRoomId={classId} />
+                <AnonymousToggle showNames={showNames} setShowNames={setShowNames} />
+            </div>
+            )}
 
-          {/* Feed reads date + classId; manages its own posts state */}
-          <DiscussionFeed date={viewDate} classRoomId={classId} />
+            {/* Feed reads date + classId; manages its own posts state */}
+            <DiscussionFeed
+                date={viewDate}
+                classRoomId={classId}
+                showNames={showNames}
+            />
 
-          <TalentBoard classId={classId} />
+            <TalentBoard classId={classId} />
         </div>
       </main>
     </div>

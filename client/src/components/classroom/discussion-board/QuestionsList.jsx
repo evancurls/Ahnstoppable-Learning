@@ -2,7 +2,7 @@
 import React from "react";
 import Comment from "./Comment/Comment";
 
-function QuestionsList({ items = [], onAddReply }) {
+function QuestionsList({ items = [], onAddReply, showNames }) {
   if (items.length === 0) {
     return (
       <p className="text-xs text-slate-400 dark:text-slate-500 text-center pt-4">
@@ -18,7 +18,7 @@ function QuestionsList({ items = [], onAddReply }) {
           key={comment.id}
           id={comment.id}
           // API returns author_name / created_at / content
-          name={comment.author_name ?? "Anonymous"}
+          name={showNames ? (comment.author_name ?? 'Anonymous') : 'Anonymous'}
           date={new Date(comment.created_at).toLocaleTimeString([], {
             hour: "numeric",
             minute: "2-digit",
@@ -26,6 +26,7 @@ function QuestionsList({ items = [], onAddReply }) {
           text={comment.content}
           replies={comment.replies ?? []}
           onAddReply={onAddReply}
+          showNames={showNames}
         />
       ))}
     </div>

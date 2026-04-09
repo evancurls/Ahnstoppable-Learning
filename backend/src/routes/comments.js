@@ -13,6 +13,8 @@ const { requireAuth } = require('../middleware/auth');
 router.get('/', requireAuth, async (req, res) => {
   const { postId } = req.params;
   try {
+    const isProfessor = req.user.role === 'professor';
+
     // Fetch comments
     const { rows: comments } = await pool.query(
       `SELECT c.id, c.content, c.created_at,
@@ -24,7 +26,7 @@ router.get('/', requireAuth, async (req, res) => {
       [postId]
     );
 
-    // Fetch all replies for these comments in one query
+    // Fetch all replies in one query
     const commentIds = comments.map(c => c.id);
     let replies = [];
     if (commentIds.length > 0) {
@@ -40,12 +42,21 @@ router.get('/', requireAuth, async (req, res) => {
       replies = rows;
     }
 
-    // Nest replies under their parent comment
+    // Professors get real names, students always get Anonymous
+    function maskName(row) {
+      if (isProfessor) return row;
+      return { ...row, author_name: 'Anonymous' };
+    }
+
     const replyMap = {};
     for (const r of replies) {
-      (replyMap[r.comment_id] ??= []).push(r);
+      (replyMap[r.comment_id] ??= []).push(maskName(r));
     }
-    const result = comments.map(c => ({ ...c, replies: replyMap[c.id] ?? [] }));
+
+    const result = comments.map(c => ({
+      ...maskName(c),
+      replies: replyMap[c.id] ?? []
+    }));
 
     return res.json(result);
   } catch (err) {

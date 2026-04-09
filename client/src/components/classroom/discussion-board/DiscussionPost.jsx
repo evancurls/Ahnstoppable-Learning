@@ -4,7 +4,7 @@ import api from "../../../api/axios";
 import QuestionsInput from "./QuestionsInput";
 import QuestionsList from "./QuestionsList";
 
-function DiscussionPost({ post, setPosts }) {
+function DiscussionPost({ post, setPosts, showNames }) {
   const [submitting, setSubmitting] = useState(false);
 
   // Fetch comments for this post on first mount
@@ -74,6 +74,7 @@ function DiscussionPost({ post, setPosts }) {
       <QuestionsList
         items={post.comments ?? []}
         onAddReply={addReply}
+        showNames={showNames}
       />
     </div>
   );

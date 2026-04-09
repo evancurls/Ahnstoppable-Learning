@@ -4,7 +4,7 @@ import Photo from "./Photo";
 
 function PhotoHeader(){
     const shuffledPhotos = [...studentPhotos].sort(() => (0.5 - Math.random()));
-    const selectedPhotos = shuffledPhotos.slice(0, 9);
+    const selectedPhotos = studentPhotos.slice(0, 9);
     return (
         <div className="grid grid-cols-3 gap-4 justify-center">
             {selectedPhotos.map((url, index) => (

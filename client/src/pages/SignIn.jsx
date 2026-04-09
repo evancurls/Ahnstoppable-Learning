@@ -107,7 +107,7 @@ function SignIn() {
  
               <p className="std-text text-sm text-center">
                 Don't have an account?{" "}
-                <a href="#" className="text-blue-600 dark:text-blue-400 hover:underline ml-1 font-semibold">
+                <a href="/register" className="text-blue-600 dark:text-blue-400 hover:underline ml-1 font-semibold">
                   Register here
                 </a>
               </p>

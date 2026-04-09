@@ -12,6 +12,7 @@ function Comment({
   text = "Sample Text",
   replies = [],
   onAddReply,
+  showNames,
 }) {
   const [showReplies, setShowReplies] = useState(false);
 
@@ -29,6 +30,7 @@ function Comment({
             replies={replies}
             showReplies={showReplies}
             onToggle={() => setShowReplies((v) => !v)}
+            showNames={showNames}
           />
         </div>
       </div>

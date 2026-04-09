@@ -2,7 +2,7 @@
 import React from "react";
 import Reply from "../Reply";
 
-function RepliesList({ replies = [] }) {
+function RepliesList({ replies = [], showNames}) {
   if (replies.length === 0) return null;
 
   return (
@@ -10,7 +10,7 @@ function RepliesList({ replies = [] }) {
       {replies.map((reply) => (
         <Reply
           key={reply.id}
-          name={reply.author_name ?? "Anonymous"}
+          name={showNames ? (reply.author_name ?? "Anonymous") : "Anonymous"}
           date={new Date(reply.created_at).toLocaleTimeString([], {
             hour: "numeric",
             minute: "2-digit",
