@@ -42,7 +42,7 @@ function CreateDiscussion({ classRoomId }) {
     return (
       <div className="w-full p-6 flex items-center justify-center">
         <button
-          className="blue-btn w-1/2 max-w-2xl"
+          className="blue-btn"
           onClick={() => setIsOpen(true)}
         >
           Start a New Discussion

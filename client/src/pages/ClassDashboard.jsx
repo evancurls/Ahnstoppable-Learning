@@ -35,7 +35,7 @@ function ClassDashboard() {
 
             {/* Only professors see the "Create Discussion" button */}
             {user?.role === "professor" && (
-            <div>
+            <div className="w-1/2">
                 <CreateDiscussion classRoomId={classId} />
                 <AnonymousToggle showNames={showNames} setShowNames={setShowNames} />
             </div>
