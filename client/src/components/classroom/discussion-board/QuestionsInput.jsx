@@ -1,51 +1,55 @@
+// src/components/classroom/discussion-board/QuestionsInput.jsx
 import React, { useState } from "react";
 
-function QuestionsInput({
-  addItem=() => {}
-}) {
-  const [inputText, changeText] = useState("");
-  function handleChange(event){
-    const newText = event.target.value;
-    changeText(newText);
+function QuestionsInput({ addItem = () => {}, disabled = false }) {
+  const [inputText, setInputText] = useState("");
+
+  function handleChange(event) {
+    setInputText(event.target.value);
   }
 
-    return (
-        <div className="w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden transition-all duration-300">
-        {/* Questions input section */}
-            <div className="p-1">
-            <textarea
-                name="questions-input"
-                rows="3"
-                className="w-full p-4 std-text  bg-transparent outline-none resize-none placeholder-slate-400 dark:placeholder-slate-500 font-medium"
-                onChange={handleChange}
-                placeholder="Post any questions here:"
-                value={inputText}
-                maxLength={125}
-            />
-            </div>
+  function handlePost() {
+    if (!inputText.trim() || disabled) return;
+    addItem(inputText);
+    setInputText("");
+  }
 
-            {/* Footer */}
-            <div className="flex items-center justify-between px-4 py-2 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800">
-                {/* Char Count */}
-                <span className={`text-xs font-medium ${inputText.length >= 110 ? 'text-orange-500' : 'text-slate-500 dark:text-slate-400'}`}>
-                    {inputText.length} / 125
-                </span>
+  return (
+    <div className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden transition-all duration-300">
+      <div className="p-1">
+        <textarea
+          name="questions-input"
+          rows="3"
+          className="w-full p-4 std-text bg-transparent outline-none resize-none placeholder-slate-400 dark:placeholder-slate-500 font-medium"
+          onChange={handleChange}
+          placeholder="Post any questions here:"
+          value={inputText}
+          maxLength={125}
+        />
+      </div>
 
+      <div className="flex items-center justify-between px-4 py-2 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800">
+        <span
+          className={`text-xs font-medium ${
+            inputText.length >= 110
+              ? "text-orange-500"
+              : "text-slate-500 dark:text-slate-400"
+          }`}
+        >
+          {inputText.length} / 125
+        </span>
 
-                <button
-                    className="px-5 py-2 rounded-md font-semibold text-sm tracking-wide transition-all duration-200 cursor-pointer
-                        text-white bg-blue-600 hover:bg-blue-700 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
-                    onClick={() => {
-                        changeText("");
-                        addItem(inputText);
-                    }}
-                    disabled={!inputText.trim()}
-                >
-                    Post
-                </button>
-            </div>
-        </div>
-    );
+        <button
+          className="px-5 py-2 rounded-md font-semibold text-sm tracking-wide transition-all duration-200 cursor-pointer
+            text-white bg-blue-600 hover:bg-blue-700 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
+          onClick={handlePost}
+          disabled={!inputText.trim() || disabled}
+        >
+          {disabled ? "Posting…" : "Post"}
+        </button>
+      </div>
+    </div>
+  );
 }
 
 export default QuestionsInput;

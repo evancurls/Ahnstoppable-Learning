@@ -1,70 +1,83 @@
-import React, { useState } from "react";
-import api from "../../../api";
-
+// src/components/classroom/discussion-board/DiscussionPost.jsx
+import React, { useEffect, useState } from "react";
+import api from "../../../api/axios";
 import QuestionsInput from "./QuestionsInput";
 import QuestionsList from "./QuestionsList";
 
-function DiscussionPost({ post }) {
-  const [questions, setQuestions] = useState([]);
+function DiscussionPost({ post, setPosts, showNames }) {
+  const [submitting, setSubmitting] = useState(false);
 
-  // ADDS COMMENT TO 
-  function addItem(item) {
-    const currTime = findTime();
-    setQuestions(prevQuestions => {
-      return [...prevQuestions, {
-        id: (prevQuestions.length === 0) ? 0 : prevQuestions[prevQuestions.length - 1].id + 1,
-        name:"Anonymous",
-        date: currTime,
-        text: item,
-        replies: [],
-        likes: 0,
-      }]
-    });
+  // Fetch comments for this post on first mount
+  useEffect(() => {
+    api
+      .get(`/api/posts/${post.id}/comments`)
+      .then((res) => {
+        setPosts((prev) =>
+          prev.map((p) =>
+            p.id === post.id ? { ...p, comments: res.data } : p
+          )
+        );
+      })
+      .catch((err) => console.error("Failed to load comments:", err));
+  }, [post.id]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  async function addComment(text) {
+    if (!text.trim() || submitting) return;
+    setSubmitting(true);
+    try {
+      // The socket event 'comment:new' will patch setPosts automatically,
+      // so we don't manually update state here — avoids duplicates.
+      await api.post(`/api/posts/${post.id}/comments`, { content: text });
+    } catch (err) {
+      console.error("Failed to post comment:", err);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
-  function findTime(){
-    const now = new Date().toLocaleTimeString([], {hour: 'numeric', minute: '2-digit', hour12: true });
-    console.log(now);
-    return now;
-  }
-
-  function addReplyToQuestion(questionId, newReplyText) {
-    console.log(`Adding reply: ${newReplyText} to question ${questionId}`);
-    setQuestions(prevQuestions => {
-      return prevQuestions.map(question => {
-        // ONLY ADDS REPLY TO MATCHING QUESTION ID
-        console.log(question);
-        if (question.id === questionId) {
-          console.log("Adding reply");
-          return {
-            ...question,
-            replies: [...question.replies, { text: newReplyText, date: findTime(), name: "Anonymous" }]
-          };
-        }
-        return question; 
-      });
-    });
+  async function addReply(commentId, text) {
+    if (!text.trim()) return;
+    try {
+      // Same pattern: socket event 'reply:new' handles the state update.
+      await api.post(
+        `/api/posts/${post.id}/comments/${commentId}/replies`,
+        { content: text }
+      );
+    } catch (err) {
+      console.error("Failed to post reply:", err);
+    }
   }
 
   return (
     <div className="w-full max-w-2xl rounded-lg shadow-md p-6 border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 normal-case font-medium text-olive-100">
-      <div className="heading pb-4">
-         <h1 className="std-text">{post}</h1>
+      {/* Post header */}
+      <div className="pb-2">
+        <h1 className="std-text text-lg font-semibold">{post.title}</h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+          {post.content}
+        </p>
+        <p className="text-xs text-slate-400 dark:text-slate-500 mt-2">
+          {post.author_name} ·{" "}
+          {new Date(post.created_at).toLocaleTimeString([], {
+            hour: "numeric",
+            minute: "2-digit",
+          })}
+        </p>
       </div>
-      <QuestionsInput 
-        addItem={addItem}
-      />
-      <QuestionsList items={questions} onAddReply={addReplyToQuestion}/>
-    </div>
 
+      <hr className="border-slate-200 dark:border-slate-700 my-4" />
+
+      {/* Comment input */}
+      <QuestionsInput addItem={addComment} disabled={submitting} />
+
+      {/* Comments list */}
+      <QuestionsList
+        items={post.comments ?? []}
+        onAddReply={addReply}
+        showNames={showNames}
+      />
+    </div>
   );
 }
 
 export default DiscussionPost;
-
-
-// {isPending 
-//       ? (<span>Loading...</span>) 
-//       : error 
-//       ? (<span> Oops!</span>) 
-//       : <QuestionsList items={questions} onAddReply={addReplyToQuestion}/>}

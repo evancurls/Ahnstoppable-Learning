@@ -1,26 +1,57 @@
-import React, {useState} from "react";
+// src/components/classroom/UnderstandCheck.jsx
+import React, { useState, useEffect } from "react";
 import SectionHeading from "../ui/SectionHeading";
+import api from "../../api/axios";
+import socket from "../../api/socket";
 
-function UnderstandCheck(){
-    function handleClick(){
+const RESPONSES = [
+  { key: "thumbs_down", emoji: "👎", bg: "bg-red-500",    active: "active:bg-red-400"    },
+  { key: "hand",        emoji: "👋", bg: "bg-yellow-300", active: "active:bg-yellow-200" },
+  { key: "thumbs_up",  emoji: "👍", bg: "bg-green-500",  active: "active:bg-green-400"  },
+];
 
+function UnderstandCheck({ classId }) {
+  const [selected, setSelected] = useState(null);
+  const [tally,    setTally]    = useState([]);
+
+  // Listen for live tally updates from other students
+  useEffect(() => {
+    socket.on("understand:update", (rows) => setTally(rows));
+    return () => socket.off("understand:update");
+  }, []);
+
+  async function handleClick(responseKey) {
+    if (selected === responseKey) return; // already submitted this
+    setSelected(responseKey);
+    try {
+      const { data } = await api.post(`/api/classes/${classId}/understand`, {
+        response: responseKey,
+      });
+      setTally(data.tally);
+    } catch (err) {
+      console.error("Failed to submit understanding check:", err);
+      setSelected(null);
     }
-    return (
-        <div className="gap-4 rounded-lg shadow-md p-6 border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 w-3/4 normal-case font-medium text-olive-100">
-            <SectionHeading text={"Understanding Check 🤔"} />
-            <div className="flex justify-around w-full p-4 std-text  bg-transparent outline-none resize-none placeholder-slate-400 dark:placeholder-slate-500 font-medium">
-                <button onClick={handleClick} className="emoji-btn bg-red-500 active:bg-red-400">
-                    <p className="text">👎</p>
-                </button>
-                <button onClick={handleClick} className="emoji-btn bg-yellow-300 active:bg-yellow-200">
-                    <p className="text">👋</p>
-                </button>
-                <button onClick={handleClick} className="emoji-btn bg-green-500 active:bg-green-400">
-                    <p className="text">👍</p>
-                </button>
-            </div>
-        </div>
-    );
+  }
+
+  return (
+    <div className="gap-4 rounded-lg shadow-md p-6 border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 w-3/4 normal-case font-medium text-olive-100">
+      <SectionHeading text="Understanding Check 🤔" />
+      <div className="flex justify-around w-full p-4 std-text bg-transparent">
+        {RESPONSES.map(({ key, emoji, bg, active }) => (
+          <button
+            key={key}
+            onClick={() => handleClick(key)}
+            className={`emoji-btn ${bg} ${active} ${
+              selected === key ? "ring-4 ring-offset-2 ring-blue-400 scale-110" : ""
+            } transition-all`}
+          >
+            <p className="text">{emoji}</p>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default UnderstandCheck;

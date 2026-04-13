@@ -1,37 +1,33 @@
-import React, {useEffect, useState} from "react";
-import axios from "axios"; 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-//import RegistrationPage from '../pages/RegistrationPage';
-import PhotoHeader from './components/ui/PhotoHeader';
+import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider, useAuth } from "./context/AuthContext";
+
 import SignIn from "./pages/SignIn";
 import HomeDashboard from "./pages/HomeDashboard";
 import ClassDashboard from "./pages/ClassDashboard";
+import Register from "./pages/Register";
+
+function PrivateRoute({ children }) {
+  const { user } = useAuth();
+  return user ? children : <Navigate to="/" replace />;
+}
 
 function App() {
-  const [array, setArray] = useState([]); 
-
-  const fetchData = async () => {
-    const response = await axios.get("http://localhost:3000");
-    setArray(response.data.msg); 
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, [])
-
   return (
-    <div className="demo-wrapper bg-gray-50">
+    <AuthProvider>
       <BrowserRouter>
-        {/* <PhotoHeader /> */}
         <Routes>
-          <Route path="/" element={<SignIn />} />
-          <Route path="/home" element={<HomeDashboard />} />
-          <Route path="/class" element={<ClassDashboard />} />
+          <Route path="/"               element={<SignIn />} />
+          <Route path="/register"       element={<Register />} />
+          <Route path="/home"           element={<PrivateRoute><HomeDashboard /></PrivateRoute>} />
+          {/* classId comes from the URL — ClassDashboard reads it via useParams() */}
+          <Route path="/class/:classId" element={<PrivateRoute><ClassDashboard /></PrivateRoute>} />
+          <Route path="*"               element={<Navigate to="/" replace />} />
         </Routes>
-        {/* <PhotoHeader /> */}
       </BrowserRouter>
-    </div>
+    </AuthProvider>
   );
 }
+ 
 
 export default App;
