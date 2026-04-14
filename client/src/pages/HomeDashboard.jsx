@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import { useAuth } from "../context/AuthContext";
- 
+
 import SectionHeading from "../components/ui/SectionHeading";
 import Header from "../components/ui/Header";
 import CourseList from "../components/homepage/CourseList";
@@ -112,33 +112,36 @@ function HomeDashboard() {
             addCourse={addCourse}
           />
         )}
- 
+
         {user?.role === "professor" && (
           <CreateCourse submitCourse={createCourse} />
         )}
- 
-        <div className="p-6 sm:p-8">
-          <div className="flex justify-between mb-6">
+
+        <div className="p-4 sm:p-6 lg:p-8">
+          <div className="flex flex-wrap gap-3 justify-between items-center mb-6">
             <SectionHeading text="Enrolled Courses" />
             <button
-              className="blue-btn"
+              className="blue-btn text-sm"
               onClick={() => setPopup(true)}
             >
-              <span className="text-lg">+</span> Add a Course
+              <span className="text-base">+</span> Add a Course
             </button>
           </div>
- 
+
           {loadError && (
             <p className="text-sm text-red-400 mb-4">
               Could not load courses: {loadError}
             </p>
           )}
- 
-          <CourseList courses={courseList} onCourseClick={handleCourseClick} />
+
+          <CourseList
+            courses={courseList}
+            onCourseClick={(id) => navigate(`/class/${id}`)}
+          />
         </div>
       </main>
     </div>
   );
 }
- 
+
 export default HomeDashboard;

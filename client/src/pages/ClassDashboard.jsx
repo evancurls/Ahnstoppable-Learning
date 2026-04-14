@@ -27,28 +27,43 @@ function ClassDashboard() {
 
   return (
     <div className="min-h-screen background flex transition-colors duration-300">
-      <main className="w-screen">
+      <main className="w-full">
         <Header rightContent={() => null} />
-        <div className="mx-auto flex flex-col justify-center items-center gap-4 w-10/12 bg-white dark:bg-slate-800">
+
+        <div className="mx-auto flex flex-col justify-center items-center gap-4 w-full px-4 sm:px-6 lg:w-10/12 lg:px-0 pb-8 bg-white dark:bg-slate-800">
+
+          {/* Date navigator */}
+          <div className="w-full overflow-x-auto">
             <ViewLogs date={viewDate} today={today} handleDate={handleDate} />
+          </div>
+
+          {/* Understanding check — full width on mobile */}
+          <div className="w-full sm:w-3/4 max-w-2xl">
             <UnderstandCheck classId={classId} />
+          </div>
 
-            {/* Only professors see the "Create Discussion" button */}
-            {user?.role === "professor" && (
-            <div className="w-1/2">
-                <CreateDiscussion classRoomId={classId} />
-                <AnonymousToggle showNames={showNames} setShowNames={setShowNames} />
+          {/* Professor controls */}
+          {user?.role === "professor" && (
+            <div className="w-full sm:w-3/4 max-w-2xl flex flex-col sm:flex-row gap-3">
+              <AnonymousToggle showNames={showNames} setShowNames={setShowNames} />
+              <CreateDiscussion classRoomId={classId} />
             </div>
-            )}
+          )}
 
-            {/* Feed reads date + classId; manages its own posts state */}
+          {/* Discussion feed */}
+          <div className="w-full max-w-2xl">
             <DiscussionFeed
-                date={viewDate}
-                classRoomId={classId}
-                showNames={showNames}
+              date={viewDate}
+              classRoomId={classId}
+              showNames={showNames}
             />
+          </div>
 
+          {/* Talent board */}
+          <div className="w-full sm:w-3/4 max-w-2xl">
             <TalentBoard classId={classId} />
+          </div>
+
         </div>
       </main>
     </div>

@@ -20,17 +20,18 @@ const server = http.createServer(app);
  
 // ── Socket.IO ────────────────────────────────────────────────────────────────
 const io = new Server(server, {
-  cors: { origin: '*', methods: ['GET', 'POST'] }
+  cors: {
+    origin: process.env.CORS_ORIGIN?.split(',') ?? '*',
+    methods: ['GET', 'POST'],
+  }
 });
-
-app.use(cors({ origin: '*' }));
 
 
 app.set('io', io); // make io accessible inside route handlers via req.app.get('io')
 registerSockets(io);
  
 // ── Express middleware ────────────────────────────────────────────────────────
-// app.use(cors({ origin: process.env.CORS_ORIGIN?.split(',') ?? '*' }));
+app.use(cors({ origin: process.env.CORS_ORIGIN?.split(',') ?? '*' }));
 app.use(express.json());
  
 // ── Routes ────────────────────────────────────────────────────────────────────

@@ -35,9 +35,9 @@ function UnderstandCheck({ classId }) {
   }
 
   return (
-    <div className="gap-4 rounded-lg shadow-md p-6 border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 w-3/4 normal-case font-medium text-olive-100">
+    <div className="w-full rounded-lg shadow-md p-4 sm:p-6 border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
       <SectionHeading text="Understanding Check 🤔" />
-      <div className="flex justify-around w-full p-4 std-text bg-transparent">
+      <div className="flex justify-around w-full pt-4 pb-2">
         {RESPONSES.map(({ key, emoji, bg, active }) => (
           <button
             key={key}

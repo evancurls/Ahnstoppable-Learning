@@ -7,7 +7,6 @@ import QuestionsList from "./QuestionsList";
 function DiscussionPost({ post, setPosts, showNames }) {
   const [submitting, setSubmitting] = useState(false);
 
-  // Fetch comments for this post on first mount
   useEffect(() => {
     api
       .get(`/api/posts/${post.id}/comments`)
@@ -25,8 +24,6 @@ function DiscussionPost({ post, setPosts, showNames }) {
     if (!text.trim() || submitting) return;
     setSubmitting(true);
     try {
-      // The socket event 'comment:new' will patch setPosts automatically,
-      // so we don't manually update state here — avoids duplicates.
       await api.post(`/api/posts/${post.id}/comments`, { content: text });
     } catch (err) {
       console.error("Failed to post comment:", err);
@@ -49,10 +46,12 @@ function DiscussionPost({ post, setPosts, showNames }) {
   }
 
   return (
-    <div className="w-full max-w-2xl rounded-lg shadow-md p-6 border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 normal-case font-medium text-olive-100">
+    <div className="w-full rounded-lg shadow-md p-4 sm:p-6 border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
       {/* Post header */}
       <div className="pb-2">
-        <h1 className="std-text text-lg font-semibold">{post.title}</h1>
+        <h1 className="std-text text-base sm:text-lg font-semibold leading-snug">
+          {post.title}
+        </h1>
         <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
           {post.content}
         </p>
@@ -65,12 +64,10 @@ function DiscussionPost({ post, setPosts, showNames }) {
         </p>
       </div>
 
-      <hr className="border-slate-200 dark:border-slate-700 my-4" />
+      <hr className="border-slate-200 dark:border-slate-700 my-3 sm:my-4" />
 
-      {/* Comment input */}
       <QuestionsInput addItem={addComment} disabled={submitting} />
 
-      {/* Comments list */}
       <QuestionsList
         items={post.comments ?? []}
         onAddReply={addReply}
